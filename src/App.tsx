@@ -1,9 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router";
+
+import FourOhFourPage from "./pages/404";
+import LandingPage from "./pages/LandingPage";
+
 function App() {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="text-3xl font-bold underline">
-        This is a React + TypeScript + Tailwind CSS + Vite + Bun template
-      </div>
+    // Default font is Times New Roman
+    <div className="font-['Times New Roman', serif]">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="*" element={<FourOhFourPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
