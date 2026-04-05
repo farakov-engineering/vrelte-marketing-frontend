@@ -1,37 +1,124 @@
+import { useState } from "react";
+
 export default function LandingPage() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const contactEmailLink = "mailto:chris@vrelte.com";
   const handleContactClick = () => {
+    setIsMobileMenuOpen(false);
     window.location.href = contactEmailLink;
   };
 
   return (
     <div className="min-h-screen bg-[#FFFDF7] text-[#2A2114]">
       <section className="relative overflow-hidden">
+        {isMobileMenuOpen && (
+          <div className="fixed inset-0 z-50 flex flex-col bg-[#FFFDF7] px-6 py-6 md:hidden">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img
+                  src="/logo.png"
+                  alt="Vrelte Logo"
+                  className="mr-3 h-10 w-10"
+                />
+                <span className="font-semibold tracking-wide">Vrelte</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="cursor-pointer rounded-full border border-[#E5D3A3] px-4 py-2 text-sm font-medium text-[#2A2114] hover:bg-[#FFF7E3]"
+              >
+                Close
+              </button>
+            </div>
+
+            <nav className="mt-12 flex flex-1 flex-col gap-4 text-xl font-semibold text-[#2A2114]">
+              <a
+                href="#how-it-works"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-2xl border border-[#EFE3C7] bg-white px-5 py-4"
+              >
+                How it works
+              </a>
+              <a
+                href="#example"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-2xl border border-[#EFE3C7] bg-white px-5 py-4"
+              >
+                Example
+              </a>
+              <a
+                href="#pricing"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="rounded-2xl border border-[#EFE3C7] bg-white px-5 py-4"
+              >
+                Pricing
+              </a>
+            </nav>
+
+            <div className="mt-6 grid gap-3">
+              <button
+                type="button"
+                onClick={handleContactClick}
+                className="cursor-pointer rounded-full bg-[#1F2937] px-5 py-3 text-sm font-medium text-white hover:opacity-90"
+              >
+                Book demo
+              </button>
+              <button
+                type="button"
+                onClick={handleContactClick}
+                className="cursor-pointer rounded-full border border-[#E5D3A3] px-5 py-3 text-sm font-medium text-[#3A2E16] hover:bg-[#FFF7E3]"
+              >
+                Contact us
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* subtle background accents */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-[#FFE7A3]/40 blur-3xl" />
           <div className="absolute right-0 top-24 h-72 w-72 rounded-full bg-[#FFD166]/20 blur-3xl" />
         </div>
         {/* NAV */}
-        <header className="flex items-center justify-between  border border-[#F2E6C9] bg-white px-6 py-2 shadow-sm">
-          <div className="flex items-center ">
-            <img src="/logo.png" alt="Vrelte Logo" className="h-10 w-10 mr-3" />
-            <span className="font-semibold tracking-wide">Vrelte</span>
+        <header className="border border-[#F2E6C9] bg-white px-4 py-3 shadow-sm md:px-6 md:py-2">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center">
+              <img
+                src="/logo.png"
+                alt="Vrelte Logo"
+                className="h-10 w-10 mr-3"
+              />
+              <span className="font-semibold tracking-wide">Vrelte</span>
+            </div>
+
+            <nav className="hidden gap-8 text-sm text-[#5A4A2A] md:flex">
+              <a href="#how-it-works" className="hover:text-black">
+                How it works
+              </a>
+              <a href="#example" className="hover:text-black">
+                Example
+              </a>
+              <a href="#pricing" className="hover:text-black">
+                Pricing
+              </a>
+            </nav>
+
+            <button
+              type="button"
+              onClick={handleContactClick}
+              className="hidden cursor-pointer whitespace-nowrap rounded-full bg-[#1F2937] px-5 py-2 text-sm font-medium text-white hover:opacity-90 md:block"
+            >
+              Book demo
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="block cursor-pointer rounded-full border border-[#E5D3A3] px-4 py-2 text-sm font-medium text-[#2A2114] hover:bg-[#FFF7E3] md:hidden"
+            >
+              Menu
+            </button>
           </div>
-
-          <nav className="flex gap-8 text-sm text-[#5A4A2A]">
-            <a className="hover:text-black">How it works</a>
-            <a className="hover:text-black">Example</a>
-            <a className="hover:text-black">Pricing</a>
-          </nav>
-
-          <button
-            type="button"
-            onClick={handleContactClick}
-            className="block cursor-pointer rounded-full bg-[#1F2937] px-5 py-2 text-sm font-medium text-white hover:opacity-90"
-          >
-            Book demo
-          </button>
         </header>
         <div className="relative mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
           {/* HERO */}
@@ -42,7 +129,7 @@ export default function LandingPage() {
               </div>
 
               <h1 className="text-5xl md:text-6xl font-semibold leading-tight">
-                Your leads get texted instantly — and qualified automatically
+                Your leads get texted instantly, and qualified automatically
               </h1>
 
               <p className="mt-6 text-lg text-[#5A4A2A] max-w-xl">
@@ -82,7 +169,7 @@ export default function LandingPage() {
                   </div>
 
                   <div className="bg-[#F59E0B] text-white p-3 rounded-xl w-fit ml-auto">
-                    Got it — what address is the property?
+                    Got it, what address is the property?
                   </div>
 
                   <div className="bg-[#FFF4DA] p-3 rounded-xl w-fit">
@@ -200,7 +287,7 @@ export default function LandingPage() {
 
               <p>
                 It asks the right questions, understands their responses, and
-                gathers everything you need — automatically.
+                gathers everything you need, automatically.
               </p>
 
               <p className="text-[#3A2E16] font-medium">
@@ -219,7 +306,7 @@ export default function LandingPage() {
                 },
                 {
                   title: "AI responds immediately",
-                  desc: "No delay — keeps attention while interest is high",
+                  desc: "No delay, keeps attention while interest is high",
                 },
                 {
                   title: "Conversation continues",
@@ -277,7 +364,7 @@ export default function LandingPage() {
               },
               {
                 title: "Choose what info you want",
-                desc: "Pick the questions you want answered — name, address, budget, timeline, anything.",
+                desc: "Pick the questions you want answered, name, address, budget, timeline, anything.",
               },
               {
                 title: "We handle the rest",
@@ -336,7 +423,7 @@ export default function LandingPage() {
                 <div className="flex justify-end">
                   <div className="bg-[#F59E0B] text-white p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-white/70 mb-1">AI</p>
-                    Got it — happy to help. What address is the property?
+                    Got it, happy to help. What address is the property?
                   </div>
                 </div>
 
@@ -538,7 +625,7 @@ export default function LandingPage() {
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
           <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-            Not a chatbot — a focused assistant
+            Not a chatbot, a focused assistant
           </div>
 
           <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -648,7 +735,7 @@ export default function LandingPage() {
             Want to see it in action?
           </h2>
           <p className="mt-5 text-base leading-7 text-[#5A4A2A] max-w-2xl mx-auto">
-            Reply to our email or book a quick demo — we’ll show you exactly how
+            Reply to our email or book a quick demo, we’ll show you exactly how
             it works with your business.
           </p>
           <div className="mt-8 flex justify-center gap-4">
