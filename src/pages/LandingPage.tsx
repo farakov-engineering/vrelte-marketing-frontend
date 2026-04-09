@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "@/index.css";
 
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -79,6 +80,7 @@ export default function LandingPage() {
           <div className="absolute top-0 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-[#FFE7A3]/40 blur-3xl" />
           <div className="absolute right-0 top-24 h-72 w-72 rounded-full bg-[#FFD166]/20 blur-3xl" />
         </div>
+
         {/* NAV */}
         <header className="border border-[#F2E6C9] bg-white px-4 py-3 shadow-sm md:px-6 md:py-2">
           <div className="flex items-center justify-between gap-3">
@@ -120,6 +122,7 @@ export default function LandingPage() {
             </button>
           </div>
         </header>
+
         <div className="relative mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
           {/* HERO */}
           <div className="grid items-center gap-14 pt-16 lg:grid-cols-2">
@@ -133,17 +136,19 @@ export default function LandingPage() {
               </h1>
 
               <p className="mt-6 text-lg text-[#5A4A2A] max-w-xl">
-                Our AI assistant responds to new inquiries, asks the right
-                questions, follows up, and sends you ready-to-go leads.
+                Built for HVAC, roofing, and plumbing contractors. The moment
+                someone fills out your form, our AI texts them, qualifies them,
+                and sends you a ready-to-go lead. Your phone number stays
+                exactly as it is.
               </p>
 
-              <div className="mt-8 flex gap-4">
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <button
                   type="button"
                   onClick={handleContactClick}
                   className="cursor-pointer rounded-full bg-[#F59E0B] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#D97706]"
                 >
-                  Try it free
+                  Try it free for 14 days
                 </button>
                 <button
                   type="button"
@@ -153,6 +158,9 @@ export default function LandingPage() {
                   Book a demo
                 </button>
               </div>
+              <p className="mt-3 text-xs text-[#9A8A6A]">
+                No credit card required. Cancel anytime.
+              </p>
             </div>
 
             {/* RIGHT MOCK */}
@@ -165,7 +173,7 @@ export default function LandingPage() {
 
                 <div className="space-y-3 text-sm">
                   <div className="bg-[#FFF4DA] p-3 rounded-xl w-fit">
-                    Hey I need help with my roof
+                    Hey I need my AC looked at
                   </div>
 
                   <div className="bg-[#F59E0B] text-white p-3 rounded-xl w-fit ml-auto">
@@ -184,7 +192,7 @@ export default function LandingPage() {
                   </div>
                   <div className="bg-[#FAF6EC] p-3 rounded-xl">
                     <p className="text-[#7A6A44]">Status</p>
-                    <p className="font-semibold">Qualified</p>
+                    <p className="font-semibold text-[#1F7A4C]">Qualified</p>
                   </div>
                 </div>
               </div>
@@ -193,7 +201,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl  px-6 pb-24 md:px-10 lg:px-12">
+      {/* PROBLEM */}
+      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
@@ -201,23 +210,23 @@ export default function LandingPage() {
             </div>
 
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              You’re losing leads without realizing it
+              You're losing jobs without realizing it
             </h2>
 
             <div className="mt-6 space-y-5 text-base leading-8 text-[#5A4A2A]">
               <p>
-                Most leads don’t respond right away. Some forget. Some lose
-                interest. Some never get followed up with.
+                Someone fills out your website form at 9pm. By the time you see
+                it the next morning they've already booked your competitor who
+                responded first.
               </p>
-
-              <p>And even when they do respond, you still have to:</p>
+              <p>And even when you do respond, you still have to:</p>
             </div>
 
             <div className="mt-7 space-y-3">
               {[
-                "text back and forth",
-                "ask the same questions every time",
-                "figure out if they’re even a good fit",
+                "text back and forth to get basic info",
+                "ask the same questions every single time",
+                "figure out if they're even a serious lead",
               ].map((item) => (
                 <div
                   key={item}
@@ -230,7 +239,7 @@ export default function LandingPage() {
             </div>
 
             <p className="mt-7 text-base leading-8 text-[#5A4A2A]">
-              That’s time you don’t have.
+              That's time you don't have when you're running a crew.
             </p>
           </div>
 
@@ -241,8 +250,8 @@ export default function LandingPage() {
                   No instant reply
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  New inquiries sit too long, and by the time someone replies,
-                  the lead has already cooled off.
+                  Leads go cold fast. Whoever replies first usually wins the
+                  job, and right now that might not be you.
                 </p>
               </div>
 
@@ -251,18 +260,18 @@ export default function LandingPage() {
                   Manual follow-up
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  Your team keeps repeating the same questions just to collect
-                  basic information.
+                  Your team keeps asking the same intake questions on every
+                  single call.
                 </p>
               </div>
 
               <div className="rounded-3xl border border-[#F2E6C9] bg-white p-5 sm:col-span-2">
                 <p className="text-sm font-medium text-[#8A6B1F]">
-                  Low-value conversations steal time
+                  Wasted time on bad leads
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  You end up spending real time on people who were never
-                  serious, while better leads wait for a response.
+                  You spend real time on people who were never serious, while
+                  better jobs wait for a callback.
                 </p>
               </div>
             </div>
@@ -270,9 +279,9 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* SOLUTION */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          {/* LEFT - SOLUTION TEXT */}
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
               Solution
@@ -283,55 +292,58 @@ export default function LandingPage() {
             </h2>
 
             <div className="mt-6 space-y-5 text-base leading-8 text-[#5A4A2A]">
-              <p>The moment a lead comes in, your AI assistant texts them.</p>
-
+              <p>
+                The moment someone fills out your website form, our AI texts
+                them within 60 seconds.
+              </p>
               <p>
                 It asks the right questions, understands their responses, and
                 gathers everything you need, automatically.
               </p>
-
               <p className="text-[#3A2E16] font-medium">
-                By the time you see the lead, it’s already qualified.
+                By the time you see the lead, it's already qualified and ready
+                for you to call back.
+              </p>
+              <p className="text-[#5A4A2A]">
+                Your existing phone number stays exactly as it is. Nothing
+                changes on your end.
               </p>
             </div>
           </div>
 
-          {/* RIGHT - VISUAL FLOW */}
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-6 shadow-sm md:p-8">
             <div className="space-y-4">
               {[
                 {
-                  title: "Lead comes in",
-                  desc: "Form, call, or message triggers instantly",
+                  title: "Lead fills out your form",
+                  desc: "Website form, Google lead, Angi - any inbound inquiry",
                 },
                 {
-                  title: "AI responds immediately",
-                  desc: "No delay, keeps attention while interest is high",
+                  title: "AI texts them in 60 seconds",
+                  desc: "No delay, catches them while interest is high",
                 },
                 {
-                  title: "Conversation continues",
-                  desc: "AI asks questions and follows up automatically",
+                  title: "Conversation continues automatically",
+                  desc: "AI asks your questions and follows up until done",
                 },
                 {
                   title: "You get a qualified lead",
-                  desc: "Structured info ready to act on",
+                  desc: "Structured info ready for you to call and close",
                 },
               ].map((step, i) => (
                 <div
                   key={i}
                   className="relative flex items-start gap-4 rounded-2xl border border-[#F2E6C9] bg-white px-5 py-5"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F59E0B] text-white text-sm font-semibold">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-white text-sm font-semibold">
                     {i + 1}
                   </div>
-
                   <div>
                     <p className="font-semibold text-[#2A2114]">{step.title}</p>
                     <p className="mt-1 text-sm text-[#5A4A2A] leading-6">
                       {step.desc}
                     </p>
                   </div>
-
                   {i !== 3 && (
                     <div className="absolute left-4 top-full h-6 w-px bg-[#E7D6A8]" />
                   )}
@@ -342,6 +354,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* HOW IT WORKS */}
       <section
         id="how-it-works"
         className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
@@ -360,15 +373,15 @@ export default function LandingPage() {
             {[
               {
                 title: "Connect your business",
-                desc: "Enter your website and we’ll understand what you do.",
+                desc: "Enter your website and we'll understand what you do, HVAC, roofing, plumbing, whatever your trade is.",
               },
               {
                 title: "Choose what info you want",
-                desc: "Pick the questions you want answered, name, address, budget, timeline, anything.",
+                desc: "Pick the questions you want answered - name, address, what the job is, urgency, budget. Anything.",
               },
               {
                 title: "We handle the rest",
-                desc: "The AI texts your leads, follows up, and keeps the conversation going until everything is collected.",
+                desc: "AI texts your leads, follows up automatically, and sends you a qualified lead ready to close.",
               },
             ].map((step, i) => (
               <div
@@ -378,15 +391,12 @@ export default function LandingPage() {
                 <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#F59E0B] text-white font-semibold">
                   {i + 1}
                 </div>
-
                 <h3 className="text-xl font-semibold text-[#2A2114]">
                   {step.title}
                 </h3>
-
                 <p className="mt-4 text-sm leading-6 text-[#5A4A2A]">
                   {step.desc}
                 </p>
-
                 {i !== 2 && (
                   <div className="hidden md:block absolute top-1/2 -right-3 h-px w-6 bg-[#E7D6A8]" />
                 )}
@@ -396,17 +406,16 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* EXAMPLE */}
       <section
         id="example"
         className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
       >
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] items-start">
-          {/* LEFT: conversation */}
           <div>
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
               What it looks like in real life
             </div>
-
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
               A real conversation becomes a ready-to-use lead
             </h2>
@@ -416,35 +425,31 @@ export default function LandingPage() {
                 <div className="flex justify-start">
                   <div className="bg-[#FFF4DA] p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-[#9e7a34] mb-1">Lead</p>
-                    Hey I need help with my roof
+                    Hey I need my AC looked at
                   </div>
                 </div>
-
                 <div className="flex justify-end">
                   <div className="bg-[#F59E0B] text-white p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-white/70 mb-1">AI</p>
                     Got it, happy to help. What address is the property?
                   </div>
                 </div>
-
                 <div className="flex justify-start">
                   <div className="bg-[#FFF4DA] p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-[#9e7a34] mb-1">Lead</p>
                     123 Main St
                   </div>
                 </div>
-
                 <div className="flex justify-end">
                   <div className="bg-[#F59E0B] text-white p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-white/70 mb-1">AI</p>
-                    Thanks. About how old is the roof?
+                    Thanks. Is it not cooling at all or just running warm?
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: structured output */}
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-6 shadow-sm">
             <div className="mb-6 flex items-center justify-between">
               <div>
@@ -460,7 +465,7 @@ export default function LandingPage() {
               {[
                 { label: "Name", value: "John Smith" },
                 { label: "Address", value: "123 Main St" },
-                { label: "Roof Issue", value: "Leak" },
+                { label: "Issue", value: "AC not cooling" },
                 { label: "Urgency", value: "High" },
                 { label: "Status", value: "Qualified" },
               ].map((item) => (
@@ -479,31 +484,27 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* WHO IT'S FOR */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] items-start">
-          {/* LEFT: WHO IT'S FOR */}
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Built for businesses that rely on leads
+              Built for contractors
             </div>
-
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
               If you get inbound inquiries, this is for you
             </h2>
-
             <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-xl">
-              Any business that depends on responding quickly and qualifying
-              potential customers can benefit from instant, structured
-              follow-up.
+              Any trade business that depends on responding quickly and
+              qualifying leads can be up and running in under 10 minutes.
             </p>
-
             <div className="mt-8 space-y-3">
               {[
-                "Contractors (roofing, HVAC, plumbing)",
-                "Law firms",
-                "Real estate agents",
-                "Home services",
-                "Any business that gets inbound inquiries",
+                "HVAC - heating, cooling, service calls",
+                "Roofing - repairs, replacements, inspections",
+                "Plumbing - emergency and scheduled jobs",
+                "Electrical - residential and commercial",
+                "Any trade that gets inbound inquiries",
               ].map((item) => (
                 <div
                   key={item}
@@ -516,24 +517,23 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* RIGHT: VISUAL CARDS */}
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                title: "Contractors",
-                desc: "Capture every job inquiry without missing calls or texts",
+                title: "HVAC",
+                desc: "Capture every service call inquiry before your competitor does",
               },
               {
-                title: "Law firms",
-                desc: "Screen potential clients before spending time on intake",
+                title: "Roofing",
+                desc: "Qualify storm damage and replacement leads automatically",
               },
               {
-                title: "Real estate",
-                desc: "Qualify buyers and sellers automatically",
+                title: "Plumbing",
+                desc: "Turn emergency inquiries into booked jobs faster",
               },
               {
-                title: "Home services",
-                desc: "Turn inbound leads into booked jobs faster",
+                title: "Electrical",
+                desc: "Screen residential and commercial leads without the back and forth",
               },
             ].map((card) => (
               <div
@@ -550,23 +550,20 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* WHY VRELTE */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] items-start">
-          {/* LEFT: BENEFITS TEXT */}
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
               Why businesses use this
             </div>
-
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
               More qualified leads, less wasted time
             </h2>
-
             <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-xl">
               Instead of chasing every inquiry manually, you focus only on the
               people who are actually ready to move forward.
             </p>
-
             <div className="mt-8 space-y-3">
               {[
                 "Respond instantly to every lead",
@@ -586,25 +583,24 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* RIGHT: VISUAL METRICS / OUTCOME */}
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
             <div className="space-y-6">
               {[
                 {
                   title: "Faster response time",
-                  desc: "Leads are contacted immediately instead of waiting minutes or hours",
+                  desc: "Leads are contacted in under 60 seconds instead of waiting hours",
                 },
                 {
                   title: "Higher conversion",
-                  desc: "Engaging instantly keeps leads warm and increases close rates",
+                  desc: "Responding first keeps leads warm and wins more jobs",
                 },
                 {
                   title: "Less manual work",
-                  desc: "No more repetitive texting or intake questions",
+                  desc: "No more repetitive back and forth just to collect basic info",
                 },
                 {
                   title: "Better lead quality",
-                  desc: "Only qualified leads reach you, saving time and effort",
+                  desc: "Only qualified leads reach you, so every callback is worth your time",
                 },
               ].map((item) => (
                 <div
@@ -622,41 +618,33 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* COMPETITOR CONTRAST */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
           <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-            Not a chatbot, a focused assistant
+            No bloat. No surprises.
           </div>
-
           <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-            Built to qualify leads, not just talk
+            Just the one thing. Done simply.
           </h2>
-
-          <div className="mt-6 space-y-4 text-base leading-8 text-[#5A4A2A] max-w-3xl">
-            <p>This isn’t a generic chatbot.</p>
-            <p>
-              It’s designed to do one thing well: qualify your leads and get you
-              the information you need.
-            </p>
-            <p>
-              It stays on task, follows up automatically, and hands off when
-              needed.
-            </p>
-          </div>
-
+          <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-2xl">
+            Most guys who tried other tools got handed a $500/month platform
+            with 200 features they'd never use, a setup process that took weeks,
+            and a support team that disappeared after onboarding.
+          </p>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
               {
-                title: "Stays on task",
-                desc: "Doesn’t drift into irrelevant conversations",
+                title: "No long contracts",
+                desc: "Cancel anytime. No 60-day notice. No being locked in.",
               },
               {
-                title: "Follows up automatically",
-                desc: "Keeps leads engaged without manual effort",
+                title: "No setup headache",
+                desc: "You're live in under 10 minutes, not two weeks of onboarding calls.",
               },
               {
-                title: "Delivers structured output",
-                desc: "You get clean, usable lead data every time",
+                title: "No hidden fees",
+                desc: "Flat monthly rate. No usage fees, no per-conversation charges, no surprises.",
               },
             ].map((item) => (
               <div
@@ -673,72 +661,128 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* PRICING */}
       <section
         id="pricing"
         className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
       >
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] items-center">
-          <div>
+        <div className="space-y-10">
+          <div className="max-w-2xl">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Try it risk-free
+              Pricing
             </div>
-
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We’ll set everything up for you
+              Simple, flat pricing
             </h2>
-
-            <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-xl">
-              If it doesn’t help your business, you don’t pay.
+            <p className="mt-4 text-base text-[#5A4A2A]">
+              No credits. No usage fees. No contracts. Just a flat monthly rate
+              that pays for itself on one extra job.
             </p>
+          </div>
 
-            <div className="mt-8 flex gap-4">
+          <div className="grid gap-6 md:grid-cols-2 max-w-3xl">
+            {/* STARTER */}
+            <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm">
+              <p className="text-sm font-medium text-[#8A6B1F]">Starter</p>
+              <div className="mt-4 flex items-end gap-1">
+                <span className="text-5xl font-semibold text-[#2A2114]">
+                  $99
+                </span>
+                <span className="mb-2 text-sm text-[#7C6A44]">/month</span>
+              </div>
+              <p className="mt-2 text-sm text-[#5A4A2A]">
+                Perfect for solo operators and small crews
+              </p>
+
+              <div className="mt-8 space-y-3 text-sm">
+                {[
+                  "AI text qualification",
+                  "Instant lead response",
+                  "Email notifications",
+                  "Basic setup included",
+                  "Up to 200 leads/month",
+                ].map((f) => (
+                  <div key={f} className="flex items-center gap-3">
+                    <div className="h-2 w-2 rounded-full bg-[#F59E0B]" />
+                    <span className="text-[#3A2E16]">{f}</span>
+                  </div>
+                ))}
+              </div>
+
               <button
                 type="button"
                 onClick={handleContactClick}
-                className="cursor-pointer rounded-full bg-[#F59E0B] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#D97706]"
+                className="mt-8 w-full cursor-pointer rounded-full border border-[#E5D3A3] px-6 py-3 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3]"
               >
-                Get started
+                Start free trial
               </button>
+              <p className="mt-2 text-center text-xs text-[#9A8A6A]">
+                No credit card required
+              </p>
+            </div>
+
+            {/* GROWTH */}
+            <div className="rounded-[2rem] border-2 border-[#F59E0B] bg-white p-8 shadow-sm relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#F59E0B] px-4 py-1 text-xs font-semibold text-white">
+                Most popular
+              </div>
+              <p className="text-sm font-medium text-[#8A6B1F]">Growth</p>
+              <div className="mt-4 flex items-end gap-1">
+                <span className="text-5xl font-semibold text-[#2A2114]">
+                  $199
+                </span>
+                <span className="mb-2 text-sm text-[#7C6A44]">/month</span>
+              </div>
+              <p className="mt-2 text-sm text-[#5A4A2A]">
+                For growing businesses with higher lead volume
+              </p>
+
+              <div className="mt-8 space-y-3 text-sm">
+                {[
+                  "Everything in Starter",
+                  "Unlimited leads",
+                  "Custom qualification questions",
+                  "Priority support",
+                  "Multi-source lead intake",
+                ].map((f) => (
+                  <div key={f} className="flex items-center gap-3">
+                    <div className="h-2 w-2 rounded-full bg-[#F59E0B]" />
+                    <span className="text-[#3A2E16]">{f}</span>
+                  </div>
+                ))}
+              </div>
+
               <button
                 type="button"
                 onClick={handleContactClick}
-                className="cursor-pointer rounded-full border border-[#E5D3A3] px-6 py-3 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3]"
+                className="mt-8 w-full cursor-pointer rounded-full bg-[#F59E0B] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#D97706]"
               >
-                Try it free
+                Start free trial
               </button>
+              <p className="mt-2 text-center text-xs text-[#9A8A6A]">
+                No credit card required
+              </p>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm">
-            <p className="text-sm text-[#7C6A44]">Setup</p>
-            <p className="text-xl font-semibold mt-1">We handle everything</p>
-
-            <div className="mt-6 space-y-3 text-sm text-[#5A4A2A]">
-              <div className="flex justify-between">
-                <span>Initial setup</span>
-                <span className="font-semibold">Included</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Customization</span>
-                <span className="font-semibold">Included</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Risk</span>
-                <span className="font-semibold">None</span>
-              </div>
-            </div>
-          </div>
+          <p className="text-sm text-[#7C6A44]">
+            Both plans include a 14-day free trial. Cancel anytime, no questions
+            asked.
+          </p>
         </div>
+      </section>
 
-        <div className="mt-16 rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] px-8 py-12 text-center shadow-sm md:px-12">
+      {/* CTA */}
+      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
+        <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] px-8 py-12 text-center shadow-sm md:px-12">
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
             Want to see it in action?
           </h2>
           <p className="mt-5 text-base leading-7 text-[#5A4A2A] max-w-2xl mx-auto">
-            Reply to our email or book a quick demo, we’ll show you exactly how
-            it works with your business.
+            Book a quick demo and we'll show you exactly how it works for your
+            trade. Setup takes less than 10 minutes.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <button
               type="button"
               onClick={handleContactClick}
@@ -751,38 +795,34 @@ export default function LandingPage() {
               onClick={handleContactClick}
               className="cursor-pointer rounded-full border border-[#E5D3A3] px-7 py-4 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3]"
             >
-              Contact us
+              Try it free, no card needed
             </button>
           </div>
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="w-full border-t border-[#EFE3C7] bg-white text-[#2A2114]">
         <div className="mx-auto w-full max-w-7xl px-6 py-14">
           <div className="grid gap-10 md:grid-cols-3">
-            {/* Brand */}
             <div>
               <div className="flex items-center gap-2 text-xl font-bold">
                 <img src="/logo.png" alt="Vrelte Logo" className="h-16 w-16" />
                 Vrelte
               </div>
-
               <p className="mt-4 max-w-sm text-sm text-[#5A4A2A]">
-                Vrelte helps businesses instantly respond to inbound leads,
-                qualify them automatically, and focus only on real customers.
+                Vrelte helps contractors instantly respond to inbound leads,
+                qualify them automatically, and focus only on real jobs.
               </p>
-
               <div className="mt-4 text-xs text-[#7C6A44]">
                 Built for speed. Built for conversion.
               </div>
             </div>
 
-            {/* Product */}
             <div>
               <div className="text-sm font-semibold text-[#2A2114]">
                 Product
               </div>
-
               <ul className="mt-4 space-y-2 text-sm text-[#5A4A2A]">
                 <li>
                   <a
@@ -810,12 +850,10 @@ export default function LandingPage() {
               </ul>
             </div>
 
-            {/* Support */}
             <div>
               <div className="text-sm font-semibold text-[#2A2114]">
                 Support
               </div>
-
               <ul className="mt-4 space-y-2 text-sm text-[#5A4A2A]">
                 <li>
                   <a href="#" className="hover:text-black transition">
@@ -836,10 +874,8 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Bottom bar */}
           <div className="mt-12 flex flex-col gap-4 border-t border-[#EFE3C7] pt-6 text-xs text-[#7C6A44] md:flex-row md:items-center md:justify-between">
             <div>© {new Date().getFullYear()} Vrelte. All rights reserved.</div>
-
             <div className="flex flex-wrap gap-4">
               <a href="#" className="hover:text-[#2A2114] transition">
                 Terms
