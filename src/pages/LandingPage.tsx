@@ -672,102 +672,76 @@ export default function LandingPage() {
               Pricing
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              Simple, flat pricing
+              We set it up. You use it. Pay when it's working.
             </h2>
             <p className="mt-4 text-base text-[#5A4A2A]">
-              No credits. No usage fees. No contracts. Just a flat monthly rate
-              that pays for itself on one extra job.
+              We don't believe in charging upfront for something you haven't
+              seen work yet. Get fully set up, start qualifying leads, and
+              only talk about payment once you're seeing real results. No
+              credit card. No commitment. No risk.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 max-w-3xl">
-            {/* STARTER */}
-            <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm">
-              <p className="text-sm font-medium text-[#8A6B1F]">Starter</p>
-              <div className="mt-4 flex items-end gap-1">
-                <span className="text-5xl font-semibold text-[#2A2114]">
-                  $99
-                </span>
-                <span className="mb-2 text-sm text-[#7C6A44]">/month</span>
+          <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 md:p-10 max-w-3xl shadow-sm">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-lg font-semibold text-[#2A2114]">
+                  Everything included from day one
+                </p>
+                <p className="mt-2 text-sm text-[#5A4A2A] max-w-md">
+                  Full setup, AI qualification, instant lead response, and
+                  ongoing support — all included. Pricing is straightforward
+                  and we'll only discuss it once you're ready.
+                </p>
               </div>
-              <p className="mt-2 text-sm text-[#5A4A2A]">
-                Perfect for solo operators and small crews
-              </p>
-
-              <div className="mt-8 space-y-3 text-sm">
-                {[
-                  "AI text qualification",
-                  "Instant lead response",
-                  "Email notifications",
-                  "Basic setup included",
-                  "Up to 200 leads/month",
-                ].map((f) => (
-                  <div key={f} className="flex items-center gap-3">
-                    <div className="h-2 w-2 rounded-full bg-[#F59E0B]" />
-                    <span className="text-[#3A2E16]">{f}</span>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-3 shrink-0">
+                <button
+                  type="button"
+                  onClick={handleContactClick}
+                  className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-3 font-semibold text-white shadow-md hover:bg-[#D97706] whitespace-nowrap"
+                >
+                  Get started for free
+                </button>
+                <a
+                  href="https://demo.vrelte.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer rounded-full border border-[#E5D3A3] px-7 py-3 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3] text-center whitespace-nowrap"
+                >
+                  View demo
+                </a>
               </div>
-
-              <button
-                type="button"
-                onClick={handleContactClick}
-                className="mt-8 w-full cursor-pointer rounded-full border border-[#E5D3A3] px-6 py-3 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3]"
-              >
-                Start free trial
-              </button>
-              <p className="mt-2 text-center text-xs text-[#9A8A6A]">
-                No credit card required
-              </p>
             </div>
 
-            {/* GROWTH */}
-            <div className="rounded-[2rem] border-2 border-[#F59E0B] bg-white p-8 shadow-sm relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#F59E0B] px-4 py-1 text-xs font-semibold text-white">
-                Most popular
-              </div>
-              <p className="text-sm font-medium text-[#8A6B1F]">Growth</p>
-              <div className="mt-4 flex items-end gap-1">
-                <span className="text-5xl font-semibold text-[#2A2114]">
-                  $199
-                </span>
-                <span className="mb-2 text-sm text-[#7C6A44]">/month</span>
-              </div>
-              <p className="mt-2 text-sm text-[#5A4A2A]">
-                For growing businesses with higher lead volume
-              </p>
-
-              <div className="mt-8 space-y-3 text-sm">
-                {[
-                  "Everything in Starter",
-                  "Unlimited leads",
-                  "Custom qualification questions",
-                  "Priority support",
-                  "Multi-source lead intake",
-                ].map((f) => (
-                  <div key={f} className="flex items-center gap-3">
-                    <div className="h-2 w-2 rounded-full bg-[#F59E0B]" />
-                    <span className="text-[#3A2E16]">{f}</span>
-                  </div>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                onClick={handleContactClick}
-                className="mt-8 w-full cursor-pointer rounded-full bg-[#F59E0B] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#D97706]"
-              >
-                Start free trial
-              </button>
-              <p className="mt-2 text-center text-xs text-[#9A8A6A]">
-                No credit card required
-              </p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 text-sm">
+              {[
+                "Full setup done for you",
+                "AI text qualification",
+                "Instant lead response",
+                "No credit card required",
+                "Unlimited leads",
+                "Ongoing support included",
+              ].map((f) => (
+                <div key={f} className="flex items-center gap-3">
+                  <div className="h-2 w-2 rounded-full bg-[#F59E0B]" />
+                  <span className="text-[#3A2E16]">{f}</span>
+                </div>
+              ))}
             </div>
           </div>
 
           <p className="text-sm text-[#7C6A44]">
-            Both plans include a 14-day free trial. Cancel anytime, no questions
-            asked.
+            Still not sure? See exactly how it works before committing to
+            anything —{" "}
+            <a
+              href="https://demo.vrelte.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-[#8A6B1F]"
+            >
+              view the live demo
+            </a>
+            .
           </p>
         </div>
       </section>
@@ -788,15 +762,16 @@ export default function LandingPage() {
               onClick={handleContactClick}
               className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-4 font-semibold text-white shadow-md hover:bg-[#D97706]"
             >
-              Book demo
+              Get started for free
             </button>
-            <button
-              type="button"
-              onClick={handleContactClick}
+            <a
+              href="https://demo.vrelte.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="cursor-pointer rounded-full border border-[#E5D3A3] px-7 py-4 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3]"
             >
-              Try it free, no card needed
-            </button>
+              View demo
+            </a>
           </div>
         </div>
       </section>
