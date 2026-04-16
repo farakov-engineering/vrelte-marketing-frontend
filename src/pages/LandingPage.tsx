@@ -6,8 +6,9 @@ export default function LandingPage() {
   const contactEmailLink = "mailto:chris@vrelte.com";
   const handleContactClick = () => {
     setIsMobileMenuOpen(false);
-    fbq("track", "Contact");
+
     window.location.href = contactEmailLink;
+    fbq("track", "Contact");
   };
 
   return (
@@ -61,11 +62,11 @@ export default function LandingPage() {
               <button
                 type="button"
                 onClick={() => {
-                  fbq("track", "Schedule");
                   window.open(
                     "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                     "_blank",
                   );
+                  fbq("track", "Schedule");
                 }}
                 className="cursor-pointer rounded-full bg-[#1F2937] px-5 py-3 text-sm font-medium text-white hover:opacity-90"
               >
@@ -115,11 +116,11 @@ export default function LandingPage() {
             <button
               type="button"
               onClick={() => {
-                fbq("track", "Schedule");
                 window.open(
                   "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                   "_blank",
                 );
+                fbq("track", "Schedule");
               }}
               className="hidden cursor-pointer whitespace-nowrap rounded-full bg-[#1F2937] px-5 py-2 text-sm font-medium text-white hover:opacity-90 md:block"
             >
@@ -165,11 +166,11 @@ export default function LandingPage() {
                 </button>
                 <button
                   onClick={() => {
-                    fbq("track", "Schedule");
                     window.open(
                       "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                       "_blank",
                     );
+                    fbq("track", "Schedule");
                   }}
                   type="button"
                   className="cursor-pointer rounded-full border border-[#E5D3A3] px-6 py-3 font-semibold text-[#3A2E16] hover:bg-[#FFF7E3]"
@@ -716,11 +717,12 @@ export default function LandingPage() {
               <div className="flex flex-col gap-3 shrink-0">
                 <button
                   onClick={() => {
-                    fbq("track", "Schedule");
+              
                     window.open(
                       "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                       "_blank",
                     );
+                       fbq("track", "Schedule");
                   }}
                   type="button"
                   className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-3 font-semibold text-white shadow-md hover:bg-[#D97706] whitespace-nowrap"
@@ -784,11 +786,12 @@ export default function LandingPage() {
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <button
               onClick={() => {
-                fbq("track", "Schedule");
+                
                 window.open(
                   "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                   "_blank",
                 );
+                fbq("track", "Schedule");
               }}
               type="button"
               className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-4 font-semibold text-white shadow-md hover:bg-[#D97706]"
