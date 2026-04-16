@@ -9,7 +9,8 @@
     "build": "bunx --bun vike build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "preview": "bunx --bun vike preview"
+    "preview": "bunx --bun vike preview",
+    "deploy": "bunx --bun vike build && wrangler pages deploy"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.2",
