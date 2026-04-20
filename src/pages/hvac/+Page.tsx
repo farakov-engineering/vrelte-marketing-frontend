@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "@/index.css";
 
-export default function LandingPage() {
+export default function Page() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const contactEmailLink = "mailto:chris@vrelte.com";
+
   const handleContactClick = () => {
     setIsMobileMenuOpen(false);
-
     window.location.href = contactEmailLink;
     fbq("track", "Contact");
   };
@@ -83,13 +83,11 @@ export default function LandingPage() {
           </div>
         )}
 
-        {/* subtle background accents */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-[#FFE7A3]/40 blur-3xl" />
           <div className="absolute right-0 top-24 h-72 w-72 rounded-full bg-[#FFD166]/20 blur-3xl" />
         </div>
 
-        {/* NAV */}
         <header className="border border-[#F2E6C9] bg-white px-4 py-3 shadow-sm md:px-6 md:py-2">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center">
@@ -138,22 +136,22 @@ export default function LandingPage() {
         </header>
 
         <div className="relative mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-          {/* HERO */}
           <div className="grid items-center gap-14 pt-16 lg:grid-cols-2">
             <div>
               <div className="mb-6 inline-block rounded-full bg-[#FFF3D1] px-4 py-2 text-sm text-[#8A6B1F]">
-                Setup takes less than 10 minutes
+                Set up your HVAC lead follow-up in under 10 minutes
               </div>
 
               <h1 className="text-5xl md:text-6xl font-semibold leading-tight">
-                Your leads get texted instantly, and qualified automatically
+                Every HVAC lead gets texted instantly and qualified
+                automatically
               </h1>
 
               <p className="mt-6 text-lg text-[#5A4A2A] max-w-xl">
-                Built for HVAC, roofing, and plumbing contractors. The moment
-                someone fills out your form, our AI texts them, qualifies them,
-                and sends you a ready-to-go lead. Your phone number stays
-                exactly as it is.
+                Built for HVAC contractors. The moment someone fills out your
+                form, Vrelte texts them, asks the right service questions, and
+                sends you a ready-to-call lead. Your office spends less time
+                chasing details, and your team gets to the right jobs faster.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -183,21 +181,21 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* RIGHT MOCK */}
             <div>
               <div className="rounded-2xl border border-[#EFE3C7] bg-white p-5 shadow-lg">
                 <div className="mb-4 border-b border-[#F3EAD3] pb-3">
-                  <p className="text-sm text-[#7C6A44]">Live lead</p>
+                  <p className="text-sm text-[#7C6A44]">Live HVAC lead</p>
                   <p className="font-semibold">Qualification in progress</p>
                 </div>
 
                 <div className="space-y-3 text-sm">
                   <div className="bg-[#FFF4DA] p-3 rounded-xl w-fit">
-                    Hey I need my AC looked at
+                    Hey my AC is blowing warm air
                   </div>
 
                   <div className="bg-[#F59E0B] text-white p-3 rounded-xl w-fit ml-auto">
-                    Got it, what address is the property?
+                    Got it. What’s the address for the system that needs
+                    service?
                   </div>
 
                   <div className="bg-[#FFF4DA] p-3 rounded-xl w-fit">
@@ -207,8 +205,8 @@ export default function LandingPage() {
 
                 <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
                   <div className="bg-[#FAF6EC] p-3 rounded-xl">
-                    <p className="text-[#7A6A44]">Name</p>
-                    <p className="font-semibold">John Smith</p>
+                    <p className="text-[#7A6A44]">Issue</p>
+                    <p className="font-semibold">AC not cooling</p>
                   </div>
                   <div className="bg-[#FAF6EC] p-3 rounded-xl">
                     <p className="text-[#7A6A44]">Status</p>
@@ -221,7 +219,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* PROBLEM */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
@@ -230,23 +227,23 @@ export default function LandingPage() {
             </div>
 
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              You're losing jobs without realizing it
+              HVAC leads go cold fast
             </h2>
 
             <div className="mt-6 space-y-5 text-base leading-8 text-[#5A4A2A]">
               <p>
-                Someone fills out your website form at 9pm. By the time you see
-                it the next morning they've already booked your competitor who
-                responded first.
+                Someone fills out your form after hours because their AC stopped
+                cooling or the heat won’t turn on. If nobody responds quickly,
+                they move on to the next HVAC company.
               </p>
-              <p>And even when you do respond, you still have to:</p>
+              <p>And even when your office does answer, you still have to:</p>
             </div>
 
             <div className="mt-7 space-y-3">
               {[
-                "text back and forth to get basic info",
-                "ask the same questions every single time",
-                "figure out if they're even a serious lead",
+                "text back and forth to get the address and system issue",
+                "ask the same service questions on every new inquiry",
+                "figure out which calls are real jobs and which ones are not",
               ].map((item) => (
                 <div
                   key={item}
@@ -259,7 +256,7 @@ export default function LandingPage() {
             </div>
 
             <p className="mt-7 text-base leading-8 text-[#5A4A2A]">
-              That's time you don't have when you're running a crew.
+              That is time your office and techs do not have during a busy day.
             </p>
           </div>
 
@@ -267,31 +264,41 @@ export default function LandingPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-3xl border border-[#F2E6C9] bg-white p-5">
                 <p className="text-sm font-medium text-[#8A6B1F]">
-                  No instant reply
+                  Slow response time
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  Leads go cold fast. Whoever replies first usually wins the
-                  job, and right now that might not be you.
+                  The first HVAC company to reply often gets the job, especially
+                  when the homeowner needs help now.
                 </p>
               </div>
 
               <div className="rounded-3xl border border-[#F2E6C9] bg-white p-5">
                 <p className="text-sm font-medium text-[#8A6B1F]">
-                  Manual follow-up
+                  Repetitive intake work
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  Your team keeps asking the same intake questions on every
-                  single call.
+                  Your office keeps collecting the same basic info on every
+                  service request.
                 </p>
               </div>
 
               <div className="rounded-3xl border border-[#F2E6C9] bg-white p-5 sm:col-span-2">
                 <p className="text-sm font-medium text-[#8A6B1F]">
-                  Wasted time on bad leads
+                  Wasted time on weak leads
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  You spend real time on people who were never serious, while
-                  better jobs wait for a callback.
+                  Your team spends time on low-intent inquiries while stronger
+                  service calls wait for a callback.
+                </p>
+              </div>
+              <div className="rounded-3xl border border-[#F2E6C9] bg-white p-5 sm:col-span-2">
+                <p className="text-sm font-medium text-[#8A6B1F]">
+                  $100,000+ lost to slow response
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
+                  Contractors who do not have a fast lead response system can
+                  lose $100,000 or more each year from missed calls, delayed
+                  follow-up, and leads booking with competitors first.
                 </p>
               </div>
             </div>
@@ -299,7 +306,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SOLUTION */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
@@ -308,25 +314,22 @@ export default function LandingPage() {
             </div>
 
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We handle the conversation for you
+              We handle the first HVAC conversation for you
             </h2>
 
             <div className="mt-6 space-y-5 text-base leading-8 text-[#5A4A2A]">
               <p>
-                The moment someone fills out your website form, our AI texts
-                them within 60 seconds.
+                The moment someone fills out your website form, Vrelte texts
+                them in under 60 seconds.
               </p>
               <p>
-                It asks the right questions, understands their responses, and
-                gathers everything you need, automatically.
+                It asks the right HVAC intake questions, understands the issue,
+                and gathers the information your office needs before anyone has
+                to step in.
               </p>
               <p className="text-[#3A2E16] font-medium">
-                By the time you see the lead, it's already qualified and ready
-                for you to call back.
-              </p>
-              <p className="text-[#5A4A2A]">
-                Your existing phone number stays exactly as it is. Nothing
-                changes on your end.
+                By the time you see the lead, it is already qualified and ready
+                for a callback, dispatch, or estimate follow-up.
               </p>
             </div>
           </div>
@@ -335,20 +338,20 @@ export default function LandingPage() {
             <div className="space-y-4">
               {[
                 {
-                  title: "Lead fills out your form",
-                  desc: "Website form, Google lead, Angi - any inbound inquiry",
+                  title: "Homeowner fills out your form",
+                  desc: "AC issue, no heat, replacement interest, or service request",
                 },
                 {
-                  title: "AI texts them in 60 seconds",
-                  desc: "No delay, catches them while interest is high",
+                  title: "Vrelte texts them in under 60 seconds",
+                  desc: "You catch the lead while they are still ready to book",
                 },
                 {
-                  title: "Conversation continues automatically",
-                  desc: "AI asks your questions and follows up until done",
+                  title: "The conversation keeps moving",
+                  desc: "Vrelte asks your intake questions and collects the job details",
                 },
                 {
-                  title: "You get a qualified lead",
-                  desc: "Structured info ready for you to call and close",
+                  title: "You get a qualified HVAC lead",
+                  desc: "Structured info ready for your office to call, quote, or dispatch",
                 },
               ].map((step, i) => (
                 <div
@@ -374,7 +377,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
       <section
         id="how-it-works"
         className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
@@ -392,16 +394,16 @@ export default function LandingPage() {
           <div className="grid gap-6 md:grid-cols-3">
             {[
               {
-                title: "Connect your business",
-                desc: "Enter your website and we'll understand what you do, HVAC, roofing, plumbing, whatever your trade is.",
+                title: "Connect your HVAC business",
+                desc: "Add your website and tell us how you want new AC, heating, and service inquiries handled.",
               },
               {
-                title: "Choose what info you want",
-                desc: "Pick the questions you want answered - name, address, what the job is, urgency, budget. Anything.",
+                title: "Choose what info you want collected",
+                desc: "Pick the questions that matter - address, issue, urgency, equipment details, budget, anything you need.",
               },
               {
-                title: "We handle the rest",
-                desc: "AI texts your leads, follows up automatically, and sends you a qualified lead ready to close.",
+                title: "Vrelte handles the follow-up",
+                desc: "New HVAC leads get an immediate text response and arrive with cleaner info for your office or dispatch team.",
               },
             ].map((step, i) => (
               <div
@@ -426,7 +428,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* EXAMPLE */}
       <section
         id="example"
         className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
@@ -437,7 +438,7 @@ export default function LandingPage() {
               What it looks like in real life
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              A real conversation becomes a ready-to-use lead
+              A real HVAC inquiry becomes a ready-to-use lead
             </h2>
 
             <div className="mt-8 rounded-[2rem] border border-[#EFE3C7] bg-white p-6 shadow-sm">
@@ -445,13 +446,13 @@ export default function LandingPage() {
                 <div className="flex justify-start">
                   <div className="bg-[#FFF4DA] p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-[#9e7a34] mb-1">Lead</p>
-                    Hey I need my AC looked at
+                    Hey my AC is not cooling
                   </div>
                 </div>
                 <div className="flex justify-end">
                   <div className="bg-[#F59E0B] text-white p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-white/70 mb-1">AI</p>
-                    Got it, happy to help. What address is the property?
+                    Got it. What is the address for the property?
                   </div>
                 </div>
                 <div className="flex justify-start">
@@ -463,7 +464,8 @@ export default function LandingPage() {
                 <div className="flex justify-end">
                   <div className="bg-[#F59E0B] text-white p-4 rounded-2xl max-w-[80%]">
                     <p className="text-xs text-white/70 mb-1">AI</p>
-                    Thanks. Is it not cooling at all or just running warm?
+                    Thanks. Is the system blowing warm air or not turning on at
+                    all?
                   </div>
                 </div>
               </div>
@@ -474,7 +476,7 @@ export default function LandingPage() {
             <div className="mb-6 flex items-center justify-between">
               <div>
                 <p className="text-sm text-[#7C6A44]">Result</p>
-                <p className="font-semibold">Qualified lead</p>
+                <p className="font-semibold">Qualified HVAC lead</p>
               </div>
               <span className="bg-[#E6F7EC] text-[#1F7A4C] px-3 py-1 rounded-full text-xs font-medium">
                 Qualified
@@ -485,7 +487,7 @@ export default function LandingPage() {
               {[
                 { label: "Name", value: "John Smith" },
                 { label: "Address", value: "123 Main St" },
-                { label: "Issue", value: "AC not cooling" },
+                { label: "Issue", value: "AC blowing warm air" },
                 { label: "Urgency", value: "High" },
                 { label: "Status", value: "Qualified" },
               ].map((item) => (
@@ -504,27 +506,27 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* WHO IT'S FOR */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] items-start">
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Built for contractors
+              Built for HVAC contractors
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              If you get inbound inquiries, this is for you
+              If you run HVAC leads, this is built for you
             </h2>
             <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-xl">
-              Any trade business that depends on responding quickly and
-              qualifying leads can be up and running in under 10 minutes.
+              Vrelte works best for HVAC companies that depend on fast
+              follow-up, cleaner intake, and getting service requests to the
+              right person quickly.
             </p>
             <div className="mt-8 space-y-3">
               {[
-                "HVAC - heating, cooling, service calls",
-                "Roofing - repairs, replacements, inspections",
-                "Plumbing - emergency and scheduled jobs",
-                "Electrical - residential and commercial",
-                "Any trade that gets inbound inquiries",
+                "Service calls and repair inquiries",
+                "No cooling and no heat requests",
+                "Replacement estimate leads",
+                "After-hours website form submissions",
+                "HVAC offices that want cleaner handoff to dispatch",
               ].map((item) => (
                 <div
                   key={item}
@@ -540,20 +542,20 @@ export default function LandingPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                title: "HVAC",
-                desc: "Capture every service call inquiry before your competitor does",
+                title: "Repair calls",
+                desc: "Respond faster when homeowners need cooling or heating help now",
               },
               {
-                title: "Roofing",
-                desc: "Qualify storm damage and replacement leads automatically",
+                title: "Replacement leads",
+                desc: "Collect better info before your comfort advisor follows up",
               },
               {
-                title: "Plumbing",
-                desc: "Turn emergency inquiries into booked jobs faster",
+                title: "After-hours inquiries",
+                desc: "Catch website leads at night instead of waiting until morning",
               },
               {
-                title: "Electrical",
-                desc: "Screen residential and commercial leads without the back and forth",
+                title: "Office efficiency",
+                desc: "Reduce repetitive intake work for your CSR or dispatch team",
               },
             ].map((card) => (
               <div
@@ -570,27 +572,27 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* WHY VRELTE */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] items-start">
           <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
             <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Why businesses use this
+              Why HVAC companies use this
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              More qualified leads, less wasted time
+              More qualified HVAC leads, less wasted office time
             </h2>
             <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-xl">
-              Instead of chasing every inquiry manually, you focus only on the
-              people who are actually ready to move forward.
+              Instead of manually chasing every inquiry, your team focuses on
+              the people who are actually ready to book service or talk about a
+              replacement.
             </p>
             <div className="mt-8 space-y-3">
               {[
-                "Respond instantly to every lead",
-                "Stop chasing people who never reply",
-                "Collect structured info automatically",
-                "Spend time only on serious customers",
-                "Increase conversion without hiring staff",
+                "Respond instantly to every new HVAC lead",
+                "Stop losing after-hours website inquiries",
+                "Collect structured service details automatically",
+                "Spend more time on serious homeowners",
+                "Improve response speed without adding office staff",
               ].map((item) => (
                 <div
                   key={item}
@@ -608,19 +610,19 @@ export default function LandingPage() {
               {[
                 {
                   title: "Faster response time",
-                  desc: "Leads are contacted in under 60 seconds instead of waiting hours",
+                  desc: "New HVAC leads get contacted in under 60 seconds instead of waiting hours",
                 },
                 {
-                  title: "Higher conversion",
-                  desc: "Responding first keeps leads warm and wins more jobs",
+                  title: "Higher booking rate",
+                  desc: "Following up first helps you win more service calls and estimates",
                 },
                 {
-                  title: "Less manual work",
-                  desc: "No more repetitive back and forth just to collect basic info",
+                  title: "Less manual intake",
+                  desc: "No more repetitive texting just to collect the basics",
                 },
                 {
                   title: "Better lead quality",
-                  desc: "Only qualified leads reach you, so every callback is worth your time",
+                  desc: "Your office gets cleaner info before calling back or dispatching",
                 },
               ].map((item) => (
                 <div
@@ -638,33 +640,32 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* COMPETITOR CONTRAST */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
           <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
             No bloat. No surprises.
           </div>
           <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-            Just the one thing. Done simply.
+            Built to do one HVAC job really well
           </h2>
           <p className="mt-6 text-base leading-8 text-[#5A4A2A] max-w-2xl">
-            Most guys who tried other tools got handed a $500/month platform
-            with 200 features they'd never use, a setup process that took weeks,
-            and a support team that disappeared after onboarding.
+            Most HVAC companies do not need another bloated platform with
+            complicated onboarding and features nobody uses. They need faster
+            lead response, better intake, and a cleaner handoff to the office.
           </p>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
               {
                 title: "No long contracts",
-                desc: "Cancel anytime. No 60-day notice. No being locked in.",
+                desc: "Cancel anytime. No lock-in and no painful cancellation process.",
               },
               {
                 title: "No setup headache",
-                desc: "You're live in under 10 minutes, not two weeks of onboarding calls.",
+                desc: "Go live quickly without weeks of onboarding calls.",
               },
               {
                 title: "No hidden fees",
-                desc: "Flat monthly rate. No usage fees, no per-conversation charges, no surprises.",
+                desc: "Straightforward pricing without surprise usage charges.",
               },
             ].map((item) => (
               <div
@@ -681,7 +682,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* PRICING */}
       <section
         id="pricing"
         className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
@@ -692,13 +692,12 @@ export default function LandingPage() {
               Pricing
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We set it up. You use it. Pay when it's working.
+              We set it up. You use it. Pay when it is working.
             </h2>
             <p className="mt-4 text-base text-[#5A4A2A]">
-              We don't believe in charging upfront for something you haven't
-              seen work yet. Get fully set up, start qualifying leads, and only
-              talk about payment once you're seeing real results. No credit
-              card. No commitment. No risk.
+              We do not believe in charging upfront for something you have not
+              seen work yet. Get fully set up, start qualifying HVAC leads, and
+              only talk about payment once you are seeing value.
             </p>
           </div>
 
@@ -709,20 +708,18 @@ export default function LandingPage() {
                   Everything included from day one
                 </p>
                 <p className="mt-2 text-sm text-[#5A4A2A] max-w-md">
-                  Full setup, AI qualification, instant lead response, and
-                  ongoing support — all included. Pricing is straightforward and
-                  we'll only discuss it once you're ready.
+                  Full setup, AI text follow-up, HVAC lead qualification, and
+                  ongoing support are all included. Pricing stays simple.
                 </p>
               </div>
               <div className="flex flex-col gap-3 shrink-0">
                 <button
                   onClick={() => {
-              
                     window.open(
                       "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                       "_blank",
                     );
-                       fbq("track", "Schedule");
+                    fbq("track", "Schedule");
                   }}
                   type="button"
                   className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-3 font-semibold text-white shadow-md hover:bg-[#D97706] whitespace-nowrap"
@@ -743,7 +740,7 @@ export default function LandingPage() {
             <div className="mt-8 grid gap-3 sm:grid-cols-2 text-sm">
               {[
                 "Full setup done for you",
-                "AI text qualification",
+                "AI text qualification for HVAC leads",
                 "Instant lead response",
                 "No credit card required",
                 "Unlimited leads",
@@ -773,20 +770,18 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
         <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] px-8 py-12 text-center shadow-sm md:px-12">
           <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-            Want to see it in action?
+            Want to see it on real HVAC leads?
           </h2>
           <p className="mt-5 text-base leading-7 text-[#5A4A2A] max-w-2xl mx-auto">
-            Book a quick demo and we'll show you exactly how it works for your
-            trade. Setup takes less than 10 minutes.
+            Book a quick demo and we will show you exactly how Vrelte fits into
+            your HVAC lead flow.
           </p>
           <div className="mt-8 flex justify-center gap-4 flex-wrap">
             <button
               onClick={() => {
-                
                 window.open(
                   "https://calendar.app.google/Q72zBkc18G6fYy8A7",
                   "_blank",
@@ -810,7 +805,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="w-full border-t border-[#EFE3C7] bg-white text-[#2A2114]">
         <div className="mx-auto w-full max-w-7xl px-6 py-14">
           <div className="grid gap-10 md:grid-cols-3">
@@ -820,8 +814,9 @@ export default function LandingPage() {
                 Vrelte
               </div>
               <p className="mt-4 max-w-sm text-sm text-[#5A4A2A]">
-                Vrelte helps contractors instantly respond to inbound leads,
-                qualify them automatically, and focus only on real jobs.
+                Vrelte helps HVAC companies instantly respond to inbound leads,
+                qualify them automatically, and focus on real service calls and
+                estimates.
               </p>
               <div className="mt-4 text-xs text-[#7C6A44]">
                 Built for speed. Built for conversion.
