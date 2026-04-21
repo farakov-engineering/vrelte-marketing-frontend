@@ -1,6 +1,6 @@
 export default function Head() {
   const title =
-    "Roofing Lead Response AI | Instantly Text New Roofing Leads | Vrelte";
+    "Vrelte — AI That Texts Back and Qualifies Your Roofer Leads";
 
   const description =
     "Vrelte instantly texts new roofing leads, qualifies them, follows up automatically, and helps roofing companies book more estimates faster.";
@@ -66,7 +66,7 @@ export default function Head() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Roofing Lead Response AI | Vrelte",
+          name: title,
           url,
           description,
         })}

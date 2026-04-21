@@ -1,9 +1,9 @@
 export default function Head() {
   const title =
-    "Vrelte — AI That Responds to Your Leads in Seconds & Books More Jobs";
+    "Vrelte — AI That Texts Back and Qualifies Your Contractor Leads";
 
   const description =
-    "Vrelte instantly texts your leads, qualifies them, and delivers ready-to-book customers. Built for contractors and service businesses.";
+    "Vrelte instantly texts your leads, qualifies them, and hands your team cleaner, higher-intent opportunities.";
 
   return (
     <>
@@ -13,7 +13,7 @@ export default function Head() {
 
       <meta
         name="keywords"
-        content="AI lead response, contractor leads, HVAC leads, plumbing leads, lead automation, SMS lead response, AI appointment booking, small business automation"
+        content="AI lead response, contractor leads, HVAC leads, plumbing leads, lead automation, SMS lead response, AI lead qualification, small business automation"
       />
 
       <meta name="author" content="Vrelte" />
@@ -52,7 +52,7 @@ export default function Head() {
             "Instant SMS lead response",
             "AI lead qualification",
             "Automated follow-ups",
-            "Appointment booking automation",
+            "Clean lead handoff",
             "Lead pipeline dashboard",
           ],
         })}

@@ -196,18 +196,18 @@ export default function Page() {
             <div>
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#F2D97A]/60 bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#D97706]" aria-hidden="true" />
-                Team assignment in under 60 seconds
+                AI lead qualification in under 60 seconds
               </div>
 
               <h1 className="text-5xl font-semibold leading-[1.15] tracking-tight md:text-6xl">
-                New jobs get scheduled and assigned to the right team member automatically
+                New leads get texted back and qualified automatically
               </h1>
 
               <p className="mt-6 max-w-xl text-lg leading-8 text-[#5A4A2A]">
                 Vrelte handles the intake conversation, collects job details,
-                and assigns each request to the right person on your team —
-                instantly. No manual dispatch, no missed assignments, no
-                customers waiting.
+                and tells you which leads are worth your team's time. No manual
+                chasing, no cold leads sitting unanswered, no guessing what the
+                customer actually needs.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -216,7 +216,7 @@ export default function Page() {
                   onClick={handleContactClick}
                   className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-3.5 font-semibold text-white shadow-md shadow-[#F59E0B]/25 transition-all duration-150 hover:bg-[#D97706] hover:shadow-[#D97706]/30 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
                 >
-                  Try it free for 14 days
+                  Join the beta
                 </button>
                 <button
                   onClick={handleScheduleClick}
@@ -721,7 +721,7 @@ export default function Page() {
               },
               {
                 title: "No hidden fees",
-                desc: "Straightforward pricing with support included.",
+                desc: "Beta shops get 90 days free before pricing gets worked out together.",
               },
             ].map((item) => (
               <div
@@ -747,12 +747,11 @@ export default function Page() {
               Pricing
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We set it up. You use it. Pay when it's working.
+              We're in beta.
             </h2>
             <p className="mt-4 text-base leading-8 text-[#5A4A2A]">
-              We don't believe in charging upfront for something you haven't
-              seen work yet. Get fully set up, start using the system, and only
-              talk about payment once you're seeing value.
+              First shops get it free for 90 days, then we'll work out pricing
+              together based on what actually delivered value.
             </p>
           </div>
 
@@ -760,12 +759,11 @@ export default function Page() {
             <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
               <div>
                 <p className="text-lg font-semibold text-[#2A2114]">
-                  Everything included from day one
+                  Free for the first 90 days
                 </p>
                 <p className="mt-2 max-w-md text-sm leading-7 text-[#5A4A2A]">
                   Full setup, automated lead response, qualification flows, and
-                  support are all included. Pricing stays straightforward and
-                  gets discussed once you're ready.
+                  support are all included while we prove the value.
                 </p>
               </div>
               <div className="shrink-0 flex flex-col gap-3">
@@ -817,6 +815,69 @@ export default function Page() {
             </a>
             .
           </p>
+        </div>
+      </section>
+
+      {/* ── Roadmap ── */}
+      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
+        <div className="space-y-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
+              Roadmap
+            </div>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
+              What we're building
+            </h2>
+            <p className="mt-4 text-base leading-8 text-[#5A4A2A]">
+              Tools that answer, qualify, and route your leads so your team
+              stays focused on the jobs.
+            </p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {[
+              {
+                label: "Shipping now",
+                title: "AI text and email qualification",
+                desc: "New leads get an instant response, answer the intake questions you'd normally ask, and land in your office as a clean, ready-to-call summary.",
+              },
+              {
+                label: "Building next",
+                title: "Voice calls and calendar booking",
+                desc: "Vrelte will handle inbound voice calls and drop qualified leads straight onto your Google Calendar.",
+              },
+              {
+                label: "On the roadmap",
+                title: "Team routing and CRM integrations",
+                desc: "Techs sign up, set their service area and availability, and Vrelte auto-routes work to the right person. Integrations with Jobber and Housecall Pro keep the rest of your workflow in sync.",
+              },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="rounded-[2rem] border border-[#EFE3C7] bg-white p-7 shadow-sm"
+              >
+                <p className="text-sm font-semibold text-[#8A6B1F]">
+                  {item.label}
+                </p>
+                <h3 className="mt-4 text-xl font-semibold text-[#2A2114]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-[#5A4A2A]">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-[2rem] border border-[#F2E6C9] bg-[#FFFCF6] p-7">
+            <p className="text-base font-semibold text-[#2A2114]">
+              Design partners get every new feature free as it ships.
+            </p>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-[#5A4A2A]">
+              Early shops help shape the product and keep access without extra
+              charges during beta.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -908,21 +969,21 @@ export default function Page() {
               <p className="text-sm font-semibold text-[#2A2114]">Support</p>
               <ul className="mt-4 space-y-2.5 text-sm text-[#5A4A2A]">
                 <li>
-                  <button
-                    type="button"
-                    onClick={handleContactClick}
-                    className="cursor-pointer transition-colors duration-150 hover:text-[#2A2114] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
+                  <a
+                    href="mailto:chris@vrelte.com"
+                    onClick={() => fbq("track", "Contact")}
+                    className="transition-colors duration-150 hover:text-[#2A2114] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
                   >
-                    Contact us
-                  </button>
+                    chris@vrelte.com
+                  </a>
                 </li>
                 <li>
-                  <a href="/privacy-policy" className="transition-colors duration-150 hover:text-[#2A2114]">
+                  <a href="/privacy.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
                     Privacy
                   </a>
                 </li>
                 <li>
-                  <a href="/terms" className="transition-colors duration-150 hover:text-[#2A2114]">
+                  <a href="/terms.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
                     Terms
                   </a>
                 </li>
@@ -931,12 +992,34 @@ export default function Page() {
           </div>
 
           <div className="mt-12 flex flex-col gap-4 border-t border-[#EFE3C7] pt-6 text-xs text-[#7C6A44] md:flex-row md:items-center md:justify-between">
-            <div>© {new Date().getFullYear()} Vrelte. All rights reserved.</div>
+            <div>
+              <p>Built by Chris and Jake.</p>
+              <p className="mt-1">
+                Reach us at{" "}
+                <a
+                  href="mailto:chris@vrelte.com"
+                  className="transition-colors duration-150 hover:text-[#2A2114]"
+                >
+                  chris@vrelte.com
+                </a>{" "}
+                or{" "}
+                <a
+                  href="mailto:jake@vrelte.com"
+                  className="transition-colors duration-150 hover:text-[#2A2114]"
+                >
+                  jake@vrelte.com
+                </a>
+                .
+              </p>
+              <p className="mt-1">
+                © {new Date().getFullYear()} Vrelte. All rights reserved.
+              </p>
+            </div>
             <div className="flex flex-wrap gap-4">
-              <a href="/terms" className="transition-colors duration-150 hover:text-[#2A2114]">
+              <a href="/terms.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
                 Terms
               </a>
-              <a href="/privacy-policy" className="transition-colors duration-150 hover:text-[#2A2114]">
+              <a href="/privacy.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
                 Privacy
               </a>
             </div>

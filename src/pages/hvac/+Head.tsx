@@ -1,5 +1,6 @@
 export default function Head() {
-  const title = "HVAC Lead Response AI | Instantly Text HVAC Leads | Vrelte";
+  const title =
+    "Vrelte — AI That Texts Back and Qualifies Your HVAC Leads";
 
   const description =
     "Vrelte instantly texts new HVAC leads, qualifies them, follows up automatically, and helps HVAC companies book more installs and service calls.";
@@ -64,7 +65,7 @@ export default function Head() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "HVAC Lead Response AI | Vrelte",
+          name: title,
           url,
           description,
         })}

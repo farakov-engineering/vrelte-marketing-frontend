@@ -1,6 +1,6 @@
 export default function Head() {
   const title =
-    "Plumbing Lead Response AI | Instantly Text Plumbing Leads | Vrelte";
+    "Vrelte — AI That Texts Back and Qualifies Your Plumber Leads";
 
   const description =
     "Vrelte instantly texts new plumbing leads, qualifies them, follows up automatically, and helps plumbing companies book more jobs faster.";
@@ -65,7 +65,7 @@ export default function Head() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Plumbing Lead Response AI | Vrelte",
+          name: title,
           url,
           description,
         })}

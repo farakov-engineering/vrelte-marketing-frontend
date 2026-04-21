@@ -293,12 +293,14 @@ export default function Page() {
               </div>
               <div className="rounded-3xl border border-[#F2E6C9] bg-white p-5 sm:col-span-2">
                 <p className="text-sm font-medium text-[#8A6B1F]">
-                  $100,000+ lost to slow response
+                  27% of home service calls go unanswered
                 </p>
                 <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">
-                  Contractors who do not have a fast lead response system can
-                  lose $100,000 or more each year from missed calls, delayed
-                  follow-up, and leads booking with competitors first.
+                  Invoca research found that over a quarter of calls to home
+                  services businesses never get picked up. With HomeAdvisor
+                  reporting the average home service job is worth $285+, those
+                  missed calls add up fast, and 78% of homeowners end up booking
+                  with the first contractor to respond.
                 </p>
               </div>
             </div>
@@ -665,7 +667,7 @@ export default function Page() {
               },
               {
                 title: "No hidden fees",
-                desc: "Straightforward pricing without surprise usage charges.",
+                desc: "Beta shops get 90 days free before pricing gets worked out together.",
               },
             ].map((item) => (
               <div
@@ -692,12 +694,11 @@ export default function Page() {
               Pricing
             </div>
             <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We set it up. You use it. Pay when it is working.
+              We're in beta.
             </h2>
             <p className="mt-4 text-base text-[#5A4A2A]">
-              We do not believe in charging upfront for something you have not
-              seen work yet. Get fully set up, start qualifying HVAC leads, and
-              only talk about payment once you are seeing value.
+              First shops get it free for 90 days, then we'll work out pricing
+              together based on what actually delivered value.
             </p>
           </div>
 
@@ -705,11 +706,11 @@ export default function Page() {
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-lg font-semibold text-[#2A2114]">
-                  Everything included from day one
+                  Free for the first 90 days
                 </p>
                 <p className="mt-2 text-sm text-[#5A4A2A] max-w-md">
                   Full setup, AI text follow-up, HVAC lead qualification, and
-                  ongoing support are all included. Pricing stays simple.
+                  ongoing support are all included while we prove the value.
                 </p>
               </div>
               <div className="flex flex-col gap-3 shrink-0">
@@ -767,6 +768,68 @@ export default function Page() {
             </a>
             .
           </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
+        <div className="space-y-10">
+          <div className="max-w-3xl">
+            <div className="inline-flex rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
+              Roadmap
+            </div>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
+              What we're building
+            </h2>
+            <p className="mt-4 text-base leading-8 text-[#5A4A2A]">
+              Tools that answer, qualify, and route your HVAC leads so your team
+              stays focused on the jobs.
+            </p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {[
+              {
+                label: "Shipping now",
+                title: "AI text and email qualification",
+                desc: "New HVAC leads get an instant response, answer the intake questions you'd normally ask, and land in your office as a clean, ready-to-call summary.",
+              },
+              {
+                label: "Building next",
+                title: "Voice calls and calendar booking",
+                desc: "Vrelte will handle inbound voice calls and drop qualified leads straight onto your Google Calendar.",
+              },
+              {
+                label: "On the roadmap",
+                title: "Team routing and CRM integrations",
+                desc: "Techs sign up, set their service area and availability, and Vrelte auto-routes work to the right person. Integrations with Jobber and Housecall Pro keep the rest of your workflow in sync.",
+              },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="rounded-[2rem] border border-[#EFE3C7] bg-white p-7 shadow-sm"
+              >
+                <p className="text-sm font-semibold text-[#8A6B1F]">
+                  {item.label}
+                </p>
+                <h3 className="mt-4 text-xl font-semibold text-[#2A2114]">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-[#5A4A2A]">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-[2rem] border border-[#F2E6C9] bg-[#FFFCF6] p-7">
+            <p className="text-base font-semibold text-[#2A2114]">
+              Design partners get every new feature free as it ships.
+            </p>
+            <p className="mt-2 max-w-3xl text-sm leading-7 text-[#5A4A2A]">
+              Early shops help shape the product and keep access without extra
+              charges during beta.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -847,7 +910,12 @@ export default function Page() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-black transition">
+                  <a
+                    href="https://calendar.app.google/Q72zBkc18G6fYy8A7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-black transition"
+                  >
                     Book demo
                   </a>
                 </li>
@@ -860,17 +928,20 @@ export default function Page() {
               </div>
               <ul className="mt-4 space-y-2 text-sm text-[#5A4A2A]">
                 <li>
-                  <a href="#" className="hover:text-black transition">
-                    Contact us
+                  <a
+                    href="mailto:chris@vrelte.com"
+                    className="hover:text-black transition"
+                  >
+                    chris@vrelte.com
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-black transition">
+                  <a href="/privacy.pdf" className="hover:text-black transition">
                     Privacy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-black transition">
+                  <a href="/terms.pdf" className="hover:text-black transition">
                     Terms
                   </a>
                 </li>
@@ -879,13 +950,35 @@ export default function Page() {
           </div>
 
           <div className="mt-12 flex flex-col gap-4 border-t border-[#EFE3C7] pt-6 text-xs text-[#7C6A44] md:flex-row md:items-center md:justify-between">
-            <div>© {new Date().getFullYear()} Vrelte. All rights reserved.</div>
+            <div>
+              <p>Built by Chris and Jake.</p>
+              <p className="mt-1">
+                Reach us at{" "}
+                <a
+                  href="mailto:chris@vrelte.com"
+                  className="hover:text-[#2A2114] transition"
+                >
+                  chris@vrelte.com
+                </a>{" "}
+                or{" "}
+                <a
+                  href="mailto:jake@vrelte.com"
+                  className="hover:text-[#2A2114] transition"
+                >
+                  jake@vrelte.com
+                </a>
+                .
+              </p>
+              <p className="mt-1">
+                © {new Date().getFullYear()} Vrelte. All rights reserved.
+              </p>
+            </div>
             <div className="flex flex-wrap gap-4">
-              <a href="#" className="hover:text-[#2A2114] transition">
+              <a href="/terms.pdf" className="hover:text-[#2A2114] transition">
                 Terms
               </a>
               <a
-                href="/privacy-policy"
+                href="/privacy.pdf"
                 className="hover:text-[#2A2114] transition"
               >
                 Privacy
