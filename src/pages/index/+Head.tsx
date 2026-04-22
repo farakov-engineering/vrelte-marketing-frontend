@@ -1,9 +1,12 @@
 export default function Head() {
   const title =
-    "Vrelte — AI That Texts Back and Qualifies Your Contractor Leads";
+    "Vrelte - AI Lead Qualification for HVAC, Roofing, and Plumbing";
 
   const description =
-    "Vrelte instantly texts your leads, qualifies them, and hands your team cleaner, higher-intent opportunities.";
+    "Vrelte catches the contractor leads your phone and inbox are dropping, then answers, qualifies, routes, and books HVAC, roofing, and plumbing jobs 24/7.";
+
+  const url = "https://vrelte.com";
+  const image = "https://vrelte.com/logo.png";
 
   return (
     <>
@@ -13,27 +16,27 @@ export default function Head() {
 
       <meta
         name="keywords"
-        content="AI lead response, contractor leads, HVAC leads, plumbing leads, lead automation, SMS lead response, AI lead qualification, small business automation"
+        content="AI lead qualification, contractor call answering, HVAC AI receptionist, roofing lead qualification, plumbing lead qualification, missed calls, emergency dispatch, contractor appointment booking"
       />
 
       <meta name="author" content="Vrelte" />
-      <link rel="canonical" href="https://vrelte.com/" />
+      <link rel="canonical" href={url} />
 
       {/* Open Graph */}
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://vrelte.com/" />
+      <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content="https://vrelte.com/logo.png" />
+      <meta property="og:image" content={image} />
       <meta property="og:site_name" content="Vrelte" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content="https://vrelte.com/logo.png" />
+      <meta name="twitter:image" content={image} />
 
-      {/* Structured Data - SaaS Product */}
+      {/* Structured Data */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
@@ -41,7 +44,7 @@ export default function Head() {
           name: "Vrelte",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
-          url: "https://vrelte.com",
+          url,
           description,
           offers: {
             "@type": "Offer",
@@ -49,22 +52,22 @@ export default function Head() {
             priceCurrency: "USD",
           },
           featureList: [
-            "Instant SMS lead response",
-            "AI lead qualification",
-            "Automated follow-ups",
-            "Clean lead handoff",
-            "Lead pipeline dashboard",
+            "AI call answering for contractors",
+            "Lead qualification for HVAC, roofing, and plumbing jobs",
+            "Emergency routing to on-call technicians",
+            "Calendar booking automation",
+            "CRM and text lead handoff",
           ],
         })}
       </script>
 
-      {/* Structured Data - Website */}
       <script type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: "Vrelte",
-          url: "https://vrelte.com",
+          "@type": "WebPage",
+          name: title,
+          url,
+          description,
         })}
       </script>
     </>

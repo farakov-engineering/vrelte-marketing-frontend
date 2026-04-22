@@ -1,1031 +1,786 @@
-import { useState, useEffect } from "react";
+import {
+  AlertTriangle,
+  ArrowRight,
+  CalendarCheck,
+  Check,
+  ChevronRight,
+  Clock3,
+  DollarSign,
+  Menu,
+  PhoneCall,
+  ShieldCheck,
+  Wrench,
+  X,
+  Zap,
+} from "lucide-react";
+import type { ReactNode } from "react";
+import { useState } from "react";
 import "@/index.css";
 
-function CheckIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0 text-[#D97706]"
-    >
-      <circle cx="8" cy="8" r="7.5" stroke="currentColor" strokeOpacity="0.3" />
-      <path
-        d="M5 8.5l2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const demoUrl = "https://calendar.app.google/Q72zBkc18G6fYy8A7";
+const contactEmailLink = "mailto:chris@vrelte.com";
 
-function XIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0 text-[#DC2626]"
-    >
-      <circle cx="8" cy="8" r="7.5" stroke="currentColor" strokeOpacity="0.3" />
-      <path
-        d="M5.5 5.5l5 5M10.5 5.5l-5 5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+const navLinks = [
+  { href: "#how-it-works", label: "How it works" },
+  { href: "#why-it-matters", label: "Why it matters" },
+  { href: "#pricing", label: "Pricing" },
+  { href: demoUrl, label: "Book a demo", external: true },
+];
+
+const lossStats = [
+  {
+    number: "42%",
+    label: "average call booking rate across trades",
+    meaning:
+      "ServiceTitan benchmark data from thousands of HVAC, plumbing, electrical, and other trade businesses.",
+    source: "1",
+  },
+  {
+    number: "24%",
+    label: "booking rate for shops with fewer than 5 techs",
+    meaning:
+      "This is the painful ICP number: smaller shops lose the majority of calls they already paid to generate.",
+    source: "2",
+  },
+  {
+    number: "7x",
+    label: "more likely to qualify a lead if you respond within an hour",
+    meaning:
+      "The HBR study analyzed 1.25 million leads across 29 B2C and 13 B2B companies.",
+    source: "3",
+  },
+  {
+    number: "60x",
+    label: "higher conversion probability inside that first hour",
+    meaning:
+      "The same study found a massive gap between responding within an hour and waiting a day.",
+    source: "3",
+  },
+  {
+    number: "Peak season",
+    label: "concentrates a large share of annual HVAC revenue",
+    meaning:
+      "IBISWorld industry analysis reinforces the obvious operational problem: your busiest months are when the phone is hardest to answer.",
+    source: "4",
+  },
+  {
+    number: "$650",
+    label: "estimated cost per HVAC callback",
+    meaning:
+      "ACCA's HVAC Blog puts real dollars on repeat visits, admin time, and lost service-call opportunity.",
+    source: "5",
+  },
+];
+
+const steps = [
+  {
+    title: "Lead comes in",
+    text: "Phone call, website form, Angi, Thumbtack, or LSA. Day, night, Sunday, 2 AM thunderstorm.",
+  },
+  {
+    title: "Vrelte responds instantly",
+    text: "Natural conversation, your company's name, your service area. Not a chatbot. Not a voicemail tree.",
+  },
+  {
+    title: "It asks the right questions",
+    text: "Job type, address, urgency, system age, access, and exactly what your techs need.",
+  },
+  {
+    title: "It books the job",
+    text: "Qualified leads land in your calendar. Emergencies get flagged. Time-wasters get politely filtered.",
+  },
+  {
+    title: "You show up and close",
+    text: "Fully briefed, with context, on the right truck, at the right time.",
+  },
+];
+
+const switchReasons = [
+  {
+    icon: Clock3,
+    title: "Answers after 5 PM",
+    text: "The majority of calls to HVAC businesses happen outside traditional business hours. That is when the AC died, the pipe burst, or the homeowner finally got home.",
+    source: "6",
+  },
+  {
+    icon: DollarSign,
+    title: "Works at your existing booking rate - times two",
+    text: "If the typical shop converts 42% of inbound calls, capturing the calls you are currently losing makes the math work even at conservative close rates.",
+    source: "1",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Never forgets a qualifying question",
+    text: "Every call collects the same structured info so your techs roll up prepared.",
+  },
+  {
+    icon: Zap,
+    title: "Does not take a summer off",
+    text: "During peak season your call volume spikes, your techs are out, and your office staff is drowning. Vrelte scales with no extra headcount.",
+  },
+];
+
+const trades = [
+  "HVAC contractors - emergency triage, system-age intake, peak-season surge handling",
+  "Roofers - storm damage, insurance context, inspection bookings",
+  "Plumbers - leak severity, water-off urgency, parts and brand capture",
+  "Any 1-10 truck shop whose phone rings while crews are on a roof",
+];
+
+const features = [
+  "Full setup done for you in under an hour",
+  "AI lead response and qualification",
+  "Instant booking to your calendar",
+  "Emergency routing to your on-call tech",
+  "Unlimited leads with no per-interaction charges",
+  "Ongoing support and tuning",
+];
+
+const faqs = [
+  {
+    q: "Does it sound like a robot?",
+    a: "No. Most callers do not realize they are talking to AI until you tell them.",
+  },
+  {
+    q: "What if someone asks something the AI cannot answer?",
+    a: 'It says "let me get a technician on that and call you right back," then texts you the transcript.',
+  },
+  {
+    q: "Do I need to change my phone system?",
+    a: "No. We forward your existing number. Setup in under an hour.",
+  },
+  {
+    q: "What about my CRM?",
+    a: "Vrelte drops qualified leads into ServiceTitan, Housecall Pro, Jobber, or whatever you use. If you do not have one, it texts you the lead directly.",
+  },
+  {
+    q: "Is this just a chatbot?",
+    a: "No. It handles real voice calls. Chat and SMS are included but optional.",
+  },
+];
+
+const sources = [
+  {
+    id: "1",
+    title:
+      "ServiceTitan - Data Report: Average Call Booking Rates, October 2022",
+    href: "https://www.servicetitan.com/blog/data-call-booking-rates",
+  },
+  {
+    id: "2",
+    title:
+      "ServiceTitan - Same benchmark report, booking rates by business size",
+    href: "https://www.servicetitan.com/blog/data-call-booking-rates",
+  },
+  {
+    id: "3",
+    title:
+      "Oldroyd, McElheran, and Elkington - The Short Life of Online Sales Leads, Harvard Business Review, March 2011",
+    href: "https://hbr.org/2011/03/the-short-life-of-online-sales-leads",
+  },
+  {
+    id: "4",
+    title:
+      "IBISWorld - HVAC industry seasonal revenue analysis, original report available by subscription",
+    href: "https://www.ibisworld.com/",
+  },
+  {
+    id: "5",
+    title:
+      "Air Conditioning Contractors of America - The True Cost of Callbacks, ACCA HVAC Blog, October 2025",
+    href: "https://hvac-blog.acca.org/the-true-cost-of-callbacks-and-how-to-stop-the-bleeding/",
+  },
+  {
+    id: "6",
+    title: "ACHR News - Using Software to Convert Calls into Cash",
+    href: "https://achrnews.com/articles/132458-using-software-to-convert-calls-into-cash",
+  },
+];
 
 export default function Page() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const contactEmailLink = "mailto:chris@vrelte.com";
 
-  useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 12);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const handleContactClick = () => {
-    setIsMobileMenuOpen(false);
-    window.location.href = contactEmailLink;
-    fbq("track", "Contact");
+  const track = (event: "Contact" | "Schedule") => {
+    if (typeof fbq === "function") {
+      fbq("track", event);
+    }
   };
 
-  const handleScheduleClick = () => {
-    window.open("https://calendar.app.google/Q72zBkc18G6fYy8A7", "_blank");
-    fbq("track", "Schedule");
+  const startSetup = () => {
+    setIsMobileMenuOpen(false);
+    window.location.href = contactEmailLink;
+    track("Contact");
+  };
+
+  const bookDemo = () => {
+    setIsMobileMenuOpen(false);
+    window.open(demoUrl, "_blank");
+    track("Schedule");
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFDF7] text-[#2A2114]">
-      {/* ── Mobile menu overlay ── */}
+    <div className="min-h-screen bg-[#F7F8F2] text-[#141711]">
       {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-50 flex flex-col bg-[#FFFDF7] px-6 py-6 md:hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-        >
+        <div className="fixed inset-0 z-50 bg-[#F7F8F2] px-5 py-5 md:hidden">
           <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img src="/logo.png" alt="Vrelte Logo" className="mr-3 h-10 w-10" />
-              <span className="font-semibold tracking-wide">Vrelte</span>
-            </div>
+            <Brand />
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(false)}
+              className="grid h-11 w-11 place-items-center border border-[#D5D7CA] bg-white text-[#141711]"
               aria-label="Close menu"
-              className="cursor-pointer rounded-full border border-[#E5D3A3] px-4 py-2 text-sm font-medium text-[#2A2114] transition-colors duration-150 hover:bg-[#FFF7E3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
             >
-              Close
+              <X className="h-5 w-5" />
             </button>
           </div>
-
-          <nav
-            className="mt-12 flex flex-1 flex-col gap-3 text-xl font-semibold text-[#2A2114]"
-            aria-label="Mobile navigation"
-          >
-            {[
-              { href: "#how-it-works", label: "How it works" },
-              { href: "#example", label: "Example" },
-              { href: "#pricing", label: "Pricing" },
-            ].map(({ href, label }) => (
+          <nav className="mt-10 grid gap-3">
+            {navLinks.map((link) => (
               <a
-                key={href}
-                href={href}
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="rounded-2xl border border-[#EFE3C7] bg-white px-5 py-4 transition-colors duration-150 hover:bg-[#FFFBF2]"
+                className="flex items-center justify-between border border-[#D5D7CA] bg-white px-4 py-4 text-lg font-semibold"
               >
-                {label}
+                {link.label}
+                <ChevronRight className="h-5 w-5 text-[#D94827]" />
               </a>
             ))}
           </nav>
-
-          <div className="mt-6 grid gap-3">
-            <button
-              type="button"
-              onClick={handleScheduleClick}
-              className="cursor-pointer rounded-full bg-[#1F2937] px-5 py-3 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90 active:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1F2937]"
-            >
-              Book demo
-            </button>
-            <button
-              type="button"
-              onClick={handleContactClick}
-              className="cursor-pointer rounded-full border border-[#E5D3A3] px-5 py-3 text-sm font-semibold text-[#3A2E16] transition-colors duration-150 hover:bg-[#FFF7E3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-            >
-              Contact us
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={startSetup}
+            className="mt-6 w-full bg-[#D94827] px-5 py-4 text-base font-bold text-white"
+          >
+            Get set up free
+          </button>
         </div>
       )}
 
-      {/* ── Hero section ── */}
-      <section className="relative overflow-hidden">
-        {/* Ambient glow */}
-        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <div className="absolute left-1/2 top-0 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[#FFE7A3]/50 blur-3xl" />
-          <div className="absolute right-0 top-24 h-80 w-80 rounded-full bg-[#FFD166]/25 blur-3xl" />
-          <div className="absolute -left-20 top-48 h-64 w-64 rounded-full bg-[#FFF3D1]/60 blur-3xl" />
-        </div>
-
-        {/* Header */}
-        <header
-          className={[
-            "sticky top-0 z-40 border-b px-4 py-3 transition-all duration-200 md:px-6 md:py-2",
-            isScrolled
-              ? "border-[#F2E6C9] bg-white/90 shadow-sm backdrop-blur-md"
-              : "border-transparent bg-transparent",
-          ].join(" ")}
-        >
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
-            <a href="/" className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B] focus-visible:ring-offset-2 rounded-lg">
-              <img src="/logo.png" alt="Vrelte Logo" className="mr-3 h-10 w-10" />
-              <span className="font-semibold tracking-wide">Vrelte</span>
-            </a>
-
-            <nav className="hidden gap-8 text-sm text-[#5A4A2A] md:flex" aria-label="Main navigation">
-              {[
-                { href: "#how-it-works", label: "How it works" },
-                { href: "#example", label: "Example" },
-                { href: "#pricing", label: "Pricing" },
-              ].map(({ href, label }) => (
-                <a
-                  key={href}
-                  href={href}
-                  className="relative py-1 transition-colors duration-150 hover:text-[#2A2114] after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-[#F59E0B] after:transition-all after:duration-200 hover:after:w-full"
-                >
-                  {label}
-                </a>
-              ))}
-            </nav>
-
+      <header className="sticky top-0 z-40 border-b border-[#D5D7CA] bg-[#F7F8F2]/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
+          <Brand />
+          <nav className="hidden items-center gap-7 text-sm font-medium text-[#4E5549] md:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="hover:text-[#141711]"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <div className="hidden items-center gap-3 md:flex">
             <button
               type="button"
-              onClick={handleScheduleClick}
-              className="hidden cursor-pointer whitespace-nowrap rounded-full bg-[#1F2937] px-5 py-2 text-sm font-semibold text-white transition-opacity duration-150 hover:opacity-90 active:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1F2937] md:block"
+              onClick={bookDemo}
+              className="border border-[#AEB4A7] bg-white px-4 py-2 text-sm font-semibold text-[#141711] hover:border-[#141711]"
             >
               Book demo
             </button>
-
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open menu"
-              aria-expanded={isMobileMenuOpen}
-              className="block cursor-pointer rounded-full border border-[#E5D3A3] px-4 py-2 text-sm font-medium text-[#2A2114] transition-colors duration-150 hover:bg-[#FFF7E3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B] md:hidden"
+              onClick={startSetup}
+              className="bg-[#D94827] px-4 py-2 text-sm font-bold text-white hover:bg-[#B83218]"
             >
-              Menu
+              Get set up free
             </button>
           </div>
-        </header>
-
-        {/* Hero content */}
-        <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-4 md:px-10 lg:px-12">
-          <div className="grid items-center gap-14 pt-16 lg:grid-cols-2">
-            <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#F2D97A]/60 bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#D97706]" aria-hidden="true" />
-                AI lead qualification in under 60 seconds
-              </div>
-
-              <h1 className="text-5xl font-semibold leading-[1.15] tracking-tight md:text-6xl">
-                New leads get texted back and qualified automatically
-              </h1>
-
-              <p className="mt-6 max-w-xl text-lg leading-8 text-[#5A4A2A]">
-                Vrelte handles the intake conversation, collects job details,
-                and tells you which leads are worth your team's time. No manual
-                chasing, no cold leads sitting unanswered, no guessing what the
-                customer actually needs.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <button
-                  type="button"
-                  onClick={handleContactClick}
-                  className="cursor-pointer rounded-full bg-[#F59E0B] px-7 py-3.5 font-semibold text-white shadow-md shadow-[#F59E0B]/25 transition-all duration-150 hover:bg-[#D97706] hover:shadow-[#D97706]/30 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-                >
-                  Join the beta
-                </button>
-                <button
-                  onClick={handleScheduleClick}
-                  type="button"
-                  className="cursor-pointer rounded-full border border-[#E5D3A3] px-7 py-3.5 font-semibold text-[#3A2E16] transition-colors duration-150 hover:bg-[#FFF7E3] hover:border-[#D4B87A] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-                >
-                  Book a demo
-                </button>
-              </div>
-
-              <p className="mt-3 text-xs text-[#9A8A6A]">
-                No credit card required. Cancel anytime.
-              </p>
-            </div>
-
-            {/* Hero demo card */}
-            <div className="lg:pl-4">
-              <div className="rounded-2xl border border-[#EFE3C7] bg-white p-5 shadow-xl shadow-[#D4B87A]/10 ring-1 ring-[#EFE3C7]/50">
-                <div className="mb-4 flex items-center justify-between border-b border-[#F3EAD3] pb-3">
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-wide text-[#9A8A6A]">Live lead</p>
-                    <p className="mt-0.5 font-semibold text-[#2A2114]">Qualification in progress</p>
-                  </div>
-                  <span className="flex items-center gap-1.5 rounded-full bg-[#E6F7EC] px-3 py-1 text-xs font-medium text-[#1F7A4C]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#1F7A4C]" aria-hidden="true" />
-                    Live
-                  </span>
-                </div>
-
-                <div className="space-y-3 text-sm">
-                  <div className="w-fit max-w-[80%] rounded-2xl rounded-tl-sm bg-[#FFF4DA] px-4 py-3 leading-6">
-                    Hi, I'm interested in getting more information
-                  </div>
-                  <div className="ml-auto w-fit max-w-[80%] rounded-2xl rounded-tr-sm bg-[#F59E0B] px-4 py-3 leading-6 text-white">
-                    Happy to help. What's the best email or phone number to reach you?
-                  </div>
-                  <div className="w-fit max-w-[80%] rounded-2xl rounded-tl-sm bg-[#FFF4DA] px-4 py-3 leading-6">
-                    chris@example.com
-                  </div>
-                </div>
-
-                <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-xl bg-[#FAF6EC] px-4 py-3">
-                    <p className="text-xs font-medium text-[#9A8A6A]">Lead type</p>
-                    <p className="mt-1 font-semibold text-[#2A2114]">Inbound inquiry</p>
-                  </div>
-                  <div className="rounded-xl bg-[#FAF6EC] px-4 py-3">
-                    <p className="text-xs font-medium text-[#9A8A6A]">Status</p>
-                    <p className="mt-1 font-semibold text-[#1F7A4C]">Qualified</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Problem / Pain points ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Problem
-            </div>
-
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              Most businesses are too slow to follow up
-            </h2>
-
-            <div className="mt-6 space-y-4 text-base leading-8 text-[#5A4A2A]">
-              <p>
-                A new lead comes in, but by the time someone replies, the moment
-                has already passed. The prospect loses interest, contacts a
-                competitor, or disappears entirely.
-              </p>
-              <p>And even when your team follows up, they still have to:</p>
-            </div>
-
-            <ul className="mt-6 space-y-3" aria-label="Pain points">
-              {[
-                "reply manually to every inquiry",
-                "ask the same qualifying questions again and again",
-                "sort serious leads from low-intent ones",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-[#F4E9CF] bg-[#FFFBF2] px-4 py-3.5 text-[#3A2E16]"
-                >
-                  <XIcon />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-6 text-base leading-8 text-[#5A4A2A]">
-              That means slower response times, more manual work, and missed
-              revenue.
-            </p>
-          </div>
-
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                {
-                  title: "Slow first response",
-                  desc: "Leads go cold quickly when nobody answers right away.",
-                },
-                {
-                  title: "Repetitive intake work",
-                  desc: "Your team wastes time collecting the same basic details every day.",
-                },
-                {
-                  title: "Low-quality lead noise",
-                  desc: "Valuable time gets spent on people who were never ready to move forward in the first place.",
-                  wide: true,
-                },
-              ].map(({ title, desc, wide }) => (
-                <div
-                  key={title}
-                  className={[
-                    "rounded-3xl border border-[#F2E6C9] bg-white p-5 transition-shadow duration-200 hover:shadow-md",
-                    wide ? "sm:col-span-2" : "",
-                  ].join(" ")}
-                >
-                  <p className="text-sm font-semibold text-[#8A6B1F]">{title}</p>
-                  <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Solution ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Solution
-            </div>
-
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We handle the first part of the conversation automatically
-            </h2>
-
-            <div className="mt-6 space-y-4 text-base leading-8 text-[#5A4A2A]">
-              <p>
-                The moment a lead comes in, Vrelte follows up automatically.
-              </p>
-              <p>
-                It asks the right questions, gathers the information you need,
-                and keeps the conversation moving without requiring your team to
-                jump in immediately.
-              </p>
-              <p className="font-medium text-[#3A2E16]">
-                By the time you see the lead, it's already organized, qualified,
-                and easier to act on.
-              </p>
-              <p>
-                You keep your existing process. Vrelte simply makes the response
-                faster and the handoff cleaner.
-              </p>
-            </div>
-          </div>
-
-          {/* Steps */}
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-6 shadow-sm md:p-8">
-            <div className="space-y-3">
-              {[
-                {
-                  title: "A lead comes in",
-                  desc: "From your website, ad campaign, landing page, or any other inbound source",
-                },
-                {
-                  title: "Vrelte responds instantly",
-                  desc: "The conversation starts while interest is still high",
-                },
-                {
-                  title: "Information gets collected automatically",
-                  desc: "The AI asks questions, follows up, and keeps the lead moving",
-                },
-                {
-                  title: "You get a qualified lead",
-                  desc: "Clean, structured information ready for the next step",
-                },
-              ].map((step, i) => (
-                <div key={i} className="relative">
-                  <div className="flex items-start gap-4 rounded-2xl border border-[#F2E6C9] bg-white px-5 py-5 transition-shadow duration-200 hover:shadow-md">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-sm font-bold text-white">
-                      {i + 1}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-[#2A2114]">{step.title}</p>
-                      <p className="mt-1 text-sm leading-6 text-[#5A4A2A]">{step.desc}</p>
-                    </div>
-                  </div>
-                  {i !== 3 && (
-                    <div
-                      className="absolute left-[2.25rem] top-full z-10 flex h-5 w-px flex-col items-center"
-                      aria-hidden="true"
-                    >
-                      <div className="h-full w-px bg-gradient-to-b from-[#E7D6A8] to-transparent" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── How it works ── */}
-      <section
-        id="how-it-works"
-        className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
-      >
-        <div className="space-y-10">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              How it works
-            </div>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              Simple setup. Fast value.
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                title: "Connect your business",
-                desc: "Tell us about your business, your lead flow, and how you want new inquiries handled.",
-              },
-              {
-                title: "Choose what you want collected",
-                desc: "Decide which details matter most so every lead arrives with the information you actually need.",
-              },
-              {
-                title: "Let Vrelte handle the follow-up",
-                desc: "New leads get an immediate response and move through a consistent qualification flow automatically.",
-              },
-            ].map((step, i) => (
-              <div
-                key={i}
-                className="group relative rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm transition-shadow duration-200 hover:shadow-md"
-              >
-                <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#F59E0B] font-bold text-white text-sm">
-                  {i + 1}
-                </div>
-                <h3 className="text-xl font-semibold text-[#2A2114]">{step.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#5A4A2A]">{step.desc}</p>
-                {i !== 2 && (
-                  <div
-                    className="absolute top-1/2 -right-3 hidden h-px w-6 bg-[#E7D6A8] md:block"
-                    aria-hidden="true"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Example ── */}
-      <section
-        id="example"
-        className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
-      >
-        <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              What it looks like in real life
-            </div>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              A lead conversation becomes a clean handoff
-            </h2>
-
-            <div className="mt-8 rounded-[2rem] border border-[#EFE3C7] bg-white p-6 shadow-sm">
-              <div className="space-y-4 text-sm">
-                {[
-                  { role: "Lead", text: "Hi, I'm interested in learning more", align: "left" },
-                  { role: "AI", text: "Happy to help. What's the best way to reach you?", align: "right" },
-                  { role: "Lead", text: "You can text me here or email me at chris@example.com", align: "left" },
-                  { role: "AI", text: "Great. Can you tell me a little about what you're looking for?", align: "right" },
-                ].map(({ role, text, align }) => (
-                  <div
-                    key={text}
-                    className={`flex ${align === "right" ? "justify-end" : "justify-start"}`}
-                  >
-                    <div
-                      className={[
-                        "max-w-[80%] rounded-2xl px-4 py-3 leading-6",
-                        align === "right"
-                          ? "rounded-tr-sm bg-[#F59E0B] text-white"
-                          : "rounded-tl-sm bg-[#FFF4DA] text-[#2A2114]",
-                      ].join(" ")}
-                    >
-                      <p
-                        className={[
-                          "mb-1 text-xs",
-                          align === "right" ? "text-white/70" : "text-[#9e7a34]",
-                        ].join(" ")}
-                      >
-                        {role}
-                      </p>
-                      {text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Qualified lead card */}
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-6 shadow-sm">
-            <div className="mb-6 flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-[#9A8A6A]">Result</p>
-                <p className="mt-0.5 font-semibold text-[#2A2114]">Qualified lead</p>
-              </div>
-              <span className="flex items-center gap-1.5 rounded-full bg-[#E6F7EC] px-3 py-1 text-xs font-semibold text-[#1F7A4C]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#1F7A4C]" aria-hidden="true" />
-                Qualified
-              </span>
-            </div>
-
-            <dl className="space-y-2.5 text-sm">
-              {[
-                { label: "Name", value: "Chris Johnson" },
-                { label: "Contact", value: "chris@example.com" },
-                { label: "Source", value: "Website form" },
-                { label: "Intent", value: "Requested more info" },
-                { label: "Status", value: "Qualified" },
-              ].map(({ label, value }) => (
-                <div
-                  key={label}
-                  className="flex items-center justify-between rounded-xl border border-[#F2E6C9] bg-white px-4 py-3"
-                >
-                  <dt className="text-[#7A6A44]">{label}</dt>
-                  <dd className="font-semibold text-[#2A2114]">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Who it's for ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="grid items-start gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Built for inbound-driven businesses
-            </div>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              If new leads matter to your business, this fits
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-[#5A4A2A]">
-              Vrelte works best for businesses that depend on responding
-              quickly, collecting the right information, and turning inquiries
-              into real conversations.
-            </p>
-            <ul className="mt-8 space-y-3" aria-label="Who Vrelte is for">
-              {[
-                "Service businesses handling inbound inquiries",
-                "Sales teams that need faster response times",
-                "Businesses running ads or lead generation campaigns",
-                "Teams that want cleaner qualification before handoff",
-                "Any business losing leads because follow-up is too slow",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-[#F4E9CF] bg-[#FFFBF2] px-4 py-3.5 text-[#3A2E16]"
-                >
-                  <CheckIcon />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              {
-                title: "Local services",
-                desc: "Respond to inbound requests before they go somewhere else",
-              },
-              {
-                title: "Sales teams",
-                desc: "Reduce response time and hand reps better-qualified opportunities",
-              },
-              {
-                title: "Agencies",
-                desc: "Capture and pre-qualify leads more consistently across campaigns",
-              },
-              {
-                title: "Growing businesses",
-                desc: "Scale follow-up without adding more manual work",
-              },
-            ].map((card) => (
-              <div
-                key={card.title}
-                className="rounded-3xl border border-[#F2E6C9] bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md"
-              >
-                <p className="font-semibold text-[#2A2114]">{card.title}</p>
-                <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Why Vrelte ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-white p-8 shadow-sm md:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Why businesses use Vrelte
-            </div>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              Better response times without more manual effort
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-[#5A4A2A]">
-              Instead of relying on someone to answer every inquiry manually,
-              Vrelte gives every lead immediate attention and a consistent
-              qualification experience.
-            </p>
-            <ul className="mt-8 space-y-3" aria-label="Benefits">
-              {[
-                "Respond instantly to every new lead",
-                "Reduce manual intake work",
-                "Collect structured information automatically",
-                "Spend more time on serious opportunities",
-                "Improve speed without adding headcount",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-[#F4E9CF] bg-[#FFFBF2] px-4 py-3.5 text-[#3A2E16]"
-                >
-                  <CheckIcon />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Faster response",
-                  desc: "Leads hear back right away instead of waiting for manual follow-up",
-                },
-                {
-                  title: "Cleaner qualification",
-                  desc: "Every inquiry goes through a consistent process before it reaches your team",
-                },
-                {
-                  title: "Less repetitive work",
-                  desc: "Stop asking the same intake questions over and over again",
-                },
-                {
-                  title: "Higher-quality handoff",
-                  desc: "Your team gets better context before taking the next step",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-2xl border border-[#F2E6C9] bg-white p-5 transition-shadow duration-200 hover:shadow-md"
-                >
-                  <p className="font-semibold text-[#2A2114]">{item.title}</p>
-                  <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Simple software ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-            No bloat. No surprises.
-          </div>
-          <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-            Simple software focused on one core job
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-[#5A4A2A]">
-            Vrelte is designed to do one thing really well: respond to new leads
-            quickly and qualify them automatically. No overloaded dashboards, no
-            complicated onboarding, and no unnecessary features.
-          </p>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {[
-              {
-                title: "No long setup process",
-                desc: "Get started quickly without weeks of configuration and onboarding calls.",
-              },
-              {
-                title: "No bloated feature set",
-                desc: "Focused functionality that supports lead response and qualification.",
-              },
-              {
-                title: "No hidden fees",
-                desc: "Beta shops get 90 days free before pricing gets worked out together.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="rounded-2xl border border-[#F2E6C9] bg-white p-6 transition-shadow duration-200 hover:shadow-md"
-              >
-                <p className="font-semibold text-[#2A2114]">{item.title}</p>
-                <p className="mt-2 text-sm leading-6 text-[#5A4A2A]">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing ── */}
-      <section
-        id="pricing"
-        className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12"
-      >
-        <div className="space-y-10">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Pricing
-            </div>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              We're in beta.
-            </h2>
-            <p className="mt-4 text-base leading-8 text-[#5A4A2A]">
-              First shops get it free for 90 days, then we'll work out pricing
-              together based on what actually delivered value.
-            </p>
-          </div>
-
-          <div className="max-w-3xl rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] p-8 shadow-sm md:p-10">
-            <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-              <div>
-                <p className="text-lg font-semibold text-[#2A2114]">
-                  Free for the first 90 days
-                </p>
-                <p className="mt-2 max-w-md text-sm leading-7 text-[#5A4A2A]">
-                  Full setup, automated lead response, qualification flows, and
-                  support are all included while we prove the value.
-                </p>
-              </div>
-              <div className="shrink-0 flex flex-col gap-3">
-                <button
-                  onClick={handleScheduleClick}
-                  type="button"
-                  className="cursor-pointer whitespace-nowrap rounded-full bg-[#F59E0B] px-7 py-3 font-semibold text-white shadow-md shadow-[#F59E0B]/25 transition-all duration-150 hover:bg-[#D97706] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-                >
-                  Get started for free
-                </button>
-                <a
-                  href="https://demo.vrelte.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer whitespace-nowrap rounded-full border border-[#E5D3A3] px-7 py-3 text-center font-semibold text-[#3A2E16] transition-colors duration-150 hover:bg-[#FFF7E3] hover:border-[#D4B87A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-                >
-                  View demo
-                </a>
-              </div>
-            </div>
-
-            <ul className="mt-8 grid gap-3 text-sm sm:grid-cols-2" aria-label="What's included">
-              {[
-                "Full setup done for you",
-                "AI lead qualification",
-                "Instant lead response",
-                "No credit card required",
-                "Unlimited leads",
-                "Ongoing support included",
-              ].map((f) => (
-                <li key={f} className="flex items-center gap-3 text-[#3A2E16]">
-                  <CheckIcon />
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <p className="text-sm text-[#7C6A44]">
-            Still not sure? See exactly how it works before committing to
-            anything —{" "}
-            <a
-              href="https://demo.vrelte.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium underline underline-offset-2 transition-colors duration-150 hover:text-[#8A6B1F]"
-            >
-              view the live demo
-            </a>
-            .
-          </p>
-        </div>
-      </section>
-
-      {/* ── Roadmap ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="space-y-10">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#FFF3D1] px-4 py-2 text-sm font-medium text-[#8A6B1F]">
-              Roadmap
-            </div>
-            <h2 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">
-              What we're building
-            </h2>
-            <p className="mt-4 text-base leading-8 text-[#5A4A2A]">
-              Tools that answer, qualify, and route your leads so your team
-              stays focused on the jobs.
-            </p>
-          </div>
-
-          <div className="grid gap-5 lg:grid-cols-3">
-            {[
-              {
-                label: "Shipping now",
-                title: "AI text and email qualification",
-                desc: "New leads get an instant response, answer the intake questions you'd normally ask, and land in your office as a clean, ready-to-call summary.",
-              },
-              {
-                label: "Building next",
-                title: "Voice calls and calendar booking",
-                desc: "Vrelte will handle inbound voice calls and drop qualified leads straight onto your Google Calendar.",
-              },
-              {
-                label: "On the roadmap",
-                title: "Team routing and CRM integrations",
-                desc: "Techs sign up, set their service area and availability, and Vrelte auto-routes work to the right person. Integrations with Jobber and Housecall Pro keep the rest of your workflow in sync.",
-              },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="rounded-[2rem] border border-[#EFE3C7] bg-white p-7 shadow-sm"
-              >
-                <p className="text-sm font-semibold text-[#8A6B1F]">
-                  {item.label}
-                </p>
-                <h3 className="mt-4 text-xl font-semibold text-[#2A2114]">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[#5A4A2A]">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-[2rem] border border-[#F2E6C9] bg-[#FFFCF6] p-7">
-            <p className="text-base font-semibold text-[#2A2114]">
-              Design partners get every new feature free as it ships.
-            </p>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-[#5A4A2A]">
-              Early shops help shape the product and keep access without extra
-              charges during beta.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Final CTA ── */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-12">
-        <div className="relative overflow-hidden rounded-[2rem] border border-[#EFE3C7] bg-[#FFFCF6] px-8 py-14 text-center shadow-sm md:px-12">
-          {/* subtle glow */}
-          <div
-            className="pointer-events-none absolute inset-0 flex items-center justify-center"
-            aria-hidden="true"
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="grid h-11 w-11 place-items-center border border-[#D5D7CA] bg-white md:hidden"
+            aria-label="Open menu"
           >
-            <div className="h-64 w-64 rounded-full bg-[#FFE7A3]/40 blur-3xl" />
-          </div>
-          <div className="relative">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-              Want to see it in action?
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#5A4A2A]">
-              Book a quick demo and we'll show you how Vrelte can fit into your
-              lead flow. Setup takes less than 10 minutes.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <button
-                onClick={handleScheduleClick}
-                type="button"
-                className="cursor-pointer rounded-full bg-[#F59E0B] px-8 py-4 font-semibold text-white shadow-lg shadow-[#F59E0B]/30 transition-all duration-150 hover:bg-[#D97706] hover:shadow-[#D97706]/35 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-              >
-                Get started for free
-              </button>
-              <a
-                href="https://demo.vrelte.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cursor-pointer rounded-full border border-[#E5D3A3] px-8 py-4 font-semibold text-[#3A2E16] transition-colors duration-150 hover:bg-[#FFF7E3] hover:border-[#D4B87A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
-              >
-                View demo
-              </a>
-            </div>
-          </div>
+            <Menu className="h-5 w-5" />
+          </button>
         </div>
-      </section>
+      </header>
 
-      {/* ── Footer ── */}
-      <footer className="w-full border-t border-[#EFE3C7] bg-white text-[#2A2114]">
-        <div className="mx-auto w-full max-w-7xl px-6 py-14">
-          <div className="grid gap-10 md:grid-cols-3">
+      <main>
+        <section className="border-b border-[#D5D7CA] bg-[#141711] text-white">
+          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:px-8 md:py-18 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
             <div>
-              <a href="/" className="inline-flex items-center gap-2 text-xl font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B] focus-visible:ring-offset-2 rounded-lg">
-                <img src="/logo.png" alt="Vrelte Logo" className="h-14 w-14" />
-                Vrelte
-              </a>
-              <p className="mt-4 max-w-sm text-sm leading-7 text-[#5A4A2A]">
-                Vrelte helps businesses instantly respond to inbound leads,
-                qualify them automatically, and focus on the opportunities most
-                likely to convert.
+              <div className="mb-5 inline-flex items-center gap-2 bg-[#F2C14E] px-3 py-2 text-xs font-black uppercase tracking-wide text-[#141711]">
+                <AlertTriangle className="h-4 w-4" />
+                Built for contractors: HVAC · Roofing · Plumbing
+              </div>
+              <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-tight md:text-7xl">
+                A typical contractor books just 42% of the calls they already
+                paid to generate.
+              </h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-[#DDE2D7] md:text-xl">
+                That number comes from ServiceTitan's own benchmark data - not
+                a guess.<sup>1</sup>{" "}
+                <strong className="text-white">
+                  The other 58% walk, hang up, or call your competitor.
+                </strong>
               </p>
-              <p className="mt-4 text-xs font-medium text-[#7C6A44]">
-                Built for speed. Built for conversion.
+              <p className="mt-4 max-w-2xl text-base leading-7 text-[#C5CDC0]">
+                Vrelte is the system that catches the leads your phone and your
+                inbox are dropping. It answers instantly, qualifies the job, and
+                books it - 24/7.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={startSetup}
+                  className="inline-flex items-center justify-center gap-2 bg-[#D94827] px-6 py-4 text-base font-black text-white hover:bg-[#B83218]"
+                >
+                  Get set up free
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={bookDemo}
+                  className="inline-flex items-center justify-center gap-2 border border-white/25 bg-white px-6 py-4 text-base font-bold text-[#141711] hover:bg-[#F2C14E]"
+                >
+                  See the 2-min demo
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </div>
+              <p className="mt-4 text-sm text-[#AEB8A8]">
+                No credit card. No contract. You only talk pricing once it is
+                winning you jobs.
               </p>
             </div>
 
-            <nav aria-label="Product links">
-              <p className="text-sm font-semibold text-[#2A2114]">Product</p>
-              <ul className="mt-4 space-y-2.5 text-sm text-[#5A4A2A]">
+            <div className="border border-white/15 bg-[#20251D] p-4 shadow-2xl md:p-6">
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-[#F2C14E]">
+                    Live call
+                  </p>
+                  <p className="mt-1 text-xl font-black">9:47 PM · AC down</p>
+                </div>
+                <div className="flex h-12 w-12 items-center justify-center bg-[#D94827]">
+                  <PhoneCall className="h-6 w-6" />
+                </div>
+              </div>
+              <div className="mt-5 grid gap-3 text-sm">
+                <Bubble label="Caller" tone="light">
+                  Hi, my AC just stopped blowing cold. It is 94 in the house.
+                </Bubble>
+                <Bubble label="Vrelte" tone="accent">
+                  I am sorry to hear that. Can I get your address and the best
+                  number to reach you?
+                </Bubble>
+                <Bubble label="Caller" tone="light">
+                  It is maybe 8 years old. Fan runs but it is blowing hot.
+                </Bubble>
+              </div>
+              <div className="mt-5 border border-[#345E50] bg-[#EAF7EF] p-4 text-[#123227]">
+                <p className="text-xs font-black uppercase tracking-wide">
+                  Lead in your dashboard
+                </p>
+                <div className="mt-3 grid gap-2 text-sm font-semibold sm:grid-cols-2">
+                  <span>Qualified: Yes</span>
+                  <span>Emergency: Yes</span>
+                  <span>System age: 8yr</span>
+                  <span>Booked: tomorrow 8:30 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="why-it-matters"
+          className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20"
+        >
+          <SectionIntro
+            eyebrow="The real numbers"
+            title="This is not AI-hype math. It is the data your industry already publishes."
+            text="You are not losing jobs because your work is bad. You are losing them because the phone rang while you were in an attic, the lead went to voicemail, and the homeowner called the next name on Google."
+          />
+          <div className="mt-8 divide-y divide-[#D5D7CA] border-y border-[#D5D7CA] bg-white">
+            {lossStats.map((stat) => (
+              <div
+                key={stat.label}
+                className="grid gap-3 px-4 py-5 md:grid-cols-[0.28fr_0.38fr_0.34fr] md:px-6"
+              >
+                <p className="text-3xl font-black text-[#D94827]">
+                  {stat.number}
+                  <sup className="ml-1 text-xs text-[#697064]">
+                    {stat.source}
+                  </sup>
+                </p>
+                <p className="text-base font-bold text-[#141711]">
+                  {stat.label}
+                </p>
+                <p className="text-sm leading-6 text-[#4E5549]">
+                  {stat.meaning}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          id="how-it-works"
+          className="border-y border-[#D5D7CA] bg-white py-14 md:py-20"
+        >
+          <div className="mx-auto max-w-7xl px-4 md:px-8">
+            <SectionIntro
+              eyebrow="How it works"
+              title="From ring to booked job while the customer still has their phone in hand."
+              text="You do not change how you work. You just stop losing the majority of jobs your phone system is eating."
+            />
+            <div className="mt-10 grid gap-3 lg:grid-cols-5">
+              {steps.map((step, index) => (
+                <div
+                  key={step.title}
+                  className="border border-[#D5D7CA] bg-[#F7F8F2] p-5"
+                >
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center bg-[#141711] text-sm font-black text-white">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-lg font-black">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#4E5549]">
+                    {step.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+          <SectionIntro
+            eyebrow="Why it works"
+            title="Four things voicemail and a busy office will never do."
+          />
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {switchReasons.map((reason) => {
+              const Icon = reason.icon;
+              return (
+                <div
+                  key={reason.title}
+                  className="border border-[#D5D7CA] bg-white p-6"
+                >
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center bg-[#F2C14E] text-[#141711]">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl font-black">
+                    {reason.title}
+                    {reason.source && (
+                      <sup className="ml-1 text-xs text-[#697064]">
+                        {reason.source}
+                      </sup>
+                    )}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[#4E5549]">
+                    {reason.text}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="border-y border-[#D5D7CA] bg-[#EAF1F6] py-14 md:py-20">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 md:px-8 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className="text-sm font-black uppercase tracking-wide text-[#245D7A]">
+                Who it is for
+              </p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
+                Built specifically for the trades.
+              </h2>
+              <p className="mt-5 text-base leading-8 text-[#3E505A]">
+                Not a generic chatbot. Not a call center reading from a script.
+                Vrelte is built around the way HVAC, roofing, and plumbing calls
+                actually happen.
+              </p>
+            </div>
+            <div className="grid gap-3">
+              {trades.map((trade) => (
+                <div
+                  key={trade}
+                  className="flex gap-3 border border-[#B5C6D1] bg-white px-4 py-4"
+                >
+                  <Wrench className="mt-1 h-5 w-5 shrink-0 text-[#D94827]" />
+                  <p className="text-sm font-semibold leading-6">{trade}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+          <SectionIntro
+            eyebrow="A real call, start to finish"
+            title="Caller panics. Vrelte qualifies. Your calendar gets the job."
+          />
+          <div className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="grid gap-3 border border-[#D5D7CA] bg-white p-4 md:p-6">
+              <Transcript speaker="Caller" time="9:47 PM">
+                Hi, my AC just stopped blowing cold. It is 94 in the house.
+              </Transcript>
+              <Transcript speaker="Vrelte">
+                I am sorry to hear that. Let us get someone out. Can I get your
+                address and the best number to reach you?
+              </Transcript>
+              <Transcript speaker="Caller">
+                It is maybe 8 years old. Fan runs but it is blowing hot.
+              </Transcript>
+              <Transcript speaker="Vrelte">
+                Got it. I can book our on-call tech for tonight at the
+                after-hours rate, or the first morning slot at 8:30. Which works
+                better?
+              </Transcript>
+            </div>
+            <div className="border border-[#345E50] bg-[#123227] p-5 text-white md:p-6">
+              <p className="text-sm font-black uppercase tracking-wide text-[#84D69A]">
+                Booked lead
+              </p>
+              <div className="mt-5 grid gap-3">
                 {[
-                  { href: "#how-it-works", label: "How it works" },
-                  { href: "#example", label: "Example" },
-                  { href: "#pricing", label: "Pricing" },
-                ].map(({ href, label }) => (
-                  <li key={href}>
-                    <a href={href} className="transition-colors duration-150 hover:text-[#2A2114]">
-                      {label}
-                    </a>
-                  </li>
+                  ["Status", "Qualified"],
+                  ["Emergency", "Yes"],
+                  ["System age", "8 years"],
+                  ["Symptom", "Warm air, fan running"],
+                  ["Booked", "Next morning, 8:30 AM"],
+                ].map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="flex items-center justify-between border border-white/15 bg-white/8 px-4 py-3"
+                  >
+                    <span className="text-sm text-[#B9D8C2]">{label}</span>
+                    <span className="text-sm font-black">{value}</span>
+                  </div>
                 ))}
-                <li>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="pricing"
+          className="border-y border-[#D5D7CA] bg-white py-14 md:py-20"
+        >
+          <div className="mx-auto max-w-7xl px-4 md:px-8">
+            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+              <div>
+                <p className="text-sm font-black uppercase tracking-wide text-[#D94827]">
+                  Pricing
+                </p>
+                <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
+                  We set it up. You use it. You pay once it is making you money.
+                </h2>
+                <p className="mt-5 text-base leading-8 text-[#4E5549]">
+                  No setup fee. No demo charge. No annual contract. Use Vrelte
+                  free for 14 days. Count the jobs it books. Then we talk
+                  pricing.
+                </p>
+                <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <button
                     type="button"
-                    onClick={handleScheduleClick}
-                    className="cursor-pointer transition-colors duration-150 hover:text-[#2A2114] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
+                    onClick={startSetup}
+                    className="inline-flex items-center justify-center gap-2 bg-[#D94827] px-6 py-4 font-black text-white hover:bg-[#B83218]"
                   >
-                    Book demo
+                    Get set up free
+                    <ArrowRight className="h-5 w-5" />
                   </button>
-                </li>
-              </ul>
-            </nav>
-
-            <nav aria-label="Support links">
-              <p className="text-sm font-semibold text-[#2A2114]">Support</p>
-              <ul className="mt-4 space-y-2.5 text-sm text-[#5A4A2A]">
-                <li>
-                  <a
-                    href="mailto:chris@vrelte.com"
-                    onClick={() => fbq("track", "Contact")}
-                    className="transition-colors duration-150 hover:text-[#2A2114] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F59E0B]"
+                  <button
+                    type="button"
+                    onClick={bookDemo}
+                    className="inline-flex items-center justify-center gap-2 border border-[#AEB4A7] bg-white px-6 py-4 font-bold hover:border-[#141711]"
                   >
-                    chris@vrelte.com
-                  </a>
-                </li>
-                <li>
-                  <a href="/privacy.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="/terms.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
-                    Terms
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                    Book a 15-min demo
+                  </button>
+                </div>
+              </div>
+              <div className="border border-[#D5D7CA] bg-[#F7F8F2] p-5 md:p-7">
+                <p className="text-xl font-black">Included from day one</p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {features.map((feature) => (
+                    <div
+                      key={feature}
+                      className="flex gap-3 border border-[#D5D7CA] bg-white p-4"
+                    >
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#1E7E4F]" />
+                      <p className="text-sm font-semibold leading-6">
+                        {feature}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="mt-12 flex flex-col gap-4 border-t border-[#EFE3C7] pt-6 text-xs text-[#7C6A44] md:flex-row md:items-center md:justify-between">
+        <section className="mx-auto max-w-7xl px-4 py-14 md:px-8 md:py-20">
+          <SectionIntro eyebrow="Fast answers" title="What owners ask first." />
+          <div className="mt-8 grid gap-3 md:grid-cols-2">
+            {faqs.map((faq) => (
+              <div key={faq.q} className="border border-[#D5D7CA] bg-white p-5">
+                <h3 className="text-lg font-black">{faq.q}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#4E5549]">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-[#D94827] px-4 py-14 text-white md:px-8 md:py-18">
+          <div className="mx-auto max-w-5xl text-center">
+            <p className="text-sm font-black uppercase tracking-wide text-[#FFE2BE]">
+              The 42% your industry books is already the ceiling.
+            </p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">
+              Vrelte raises it.
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#FFE8DA]">
+              Your competitor answered on the second ring. Yours went to
+              voicemail. Get a working system by end of day.
+            </p>
+            <button
+              type="button"
+              onClick={startSetup}
+              className="mt-8 inline-flex items-center justify-center gap-2 bg-white px-7 py-4 text-base font-black text-[#141711] hover:bg-[#F2C14E]"
+            >
+              Get set up free - running by end of day
+              <CalendarCheck className="h-5 w-5" />
+            </button>
+            <p className="mt-4 text-sm text-[#FFE8DA]">
+              No credit card. No contract. No sales call.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-[#D5D7CA] bg-[#141711] text-white">
+        <div className="mx-auto max-w-7xl px-4 py-12 md:px-8">
+          <div className="grid gap-8 lg:grid-cols-[0.6fr_1.4fr]">
             <div>
-              <p>Built by Chris and Jake.</p>
-              <p className="mt-1">
-                Reach us at{" "}
-                <a
-                  href="mailto:chris@vrelte.com"
-                  className="transition-colors duration-150 hover:text-[#2A2114]"
-                >
-                  chris@vrelte.com
-                </a>{" "}
-                or{" "}
-                <a
-                  href="mailto:jake@vrelte.com"
-                  className="transition-colors duration-150 hover:text-[#2A2114]"
-                >
-                  jake@vrelte.com
-                </a>
-                .
+              <Brand inverse />
+              <p className="mt-4 max-w-sm text-sm leading-7 text-[#B8C0B2]">
+                AI lead qualification for HVAC, roofing, and plumbing
+                contractors.
               </p>
-              <p className="mt-1">
+              <p className="mt-6 text-xs text-[#87907F]">
                 © {new Date().getFullYear()} Vrelte. All rights reserved.
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
-              <a href="/terms.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
-                Terms
-              </a>
-              <a href="/privacy.pdf" className="transition-colors duration-150 hover:text-[#2A2114]">
-                Privacy
-              </a>
+            <div>
+              <p className="text-sm font-black uppercase tracking-wide text-[#F2C14E]">
+                Sources
+              </p>
+              <ol className="mt-4 grid gap-2 text-xs leading-6 text-[#B8C0B2] md:grid-cols-2">
+                {sources.map((source) => (
+                  <li key={source.id}>
+                    <a
+                      href={source.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white"
+                    >
+                      {source.id}. {source.title}
+                    </a>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function Brand({ inverse = false }: { inverse?: boolean }) {
+  return (
+    <div className="flex items-center gap-3">
+      <img src="/logo.png" alt="Vrelte Logo" className="h-10 w-10" />
+      <span
+        className={`text-lg font-black tracking-tight ${
+          inverse ? "text-white" : "text-[#141711]"
+        }`}
+      >
+        Vrelte
+      </span>
+    </div>
+  );
+}
+
+function SectionIntro({
+  eyebrow,
+  title,
+  text,
+}: {
+  eyebrow: string;
+  title: string;
+  text?: string;
+}) {
+  return (
+    <div className="max-w-4xl">
+      <p className="text-sm font-black uppercase tracking-wide text-[#D94827]">
+        {eyebrow}
+      </p>
+      <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
+        {title}
+      </h2>
+      {text && (
+        <p className="mt-5 max-w-3xl text-base leading-8 text-[#4E5549]">
+          {text}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function Bubble({
+  label,
+  children,
+  tone,
+}: {
+  label: string;
+  children: ReactNode;
+  tone: "light" | "accent";
+}) {
+  return (
+    <div
+      className={`max-w-[92%] p-4 ${
+        tone === "accent"
+          ? "ml-auto bg-[#D94827] text-white"
+          : "bg-white text-[#141711]"
+      }`}
+    >
+      <p
+        className={`mb-1 text-xs font-black uppercase tracking-wide ${
+          tone === "accent" ? "text-[#FFE8DA]" : "text-[#697064]"
+        }`}
+      >
+        {label}
+      </p>
+      <p className="leading-6">{children}</p>
+    </div>
+  );
+}
+
+function Transcript({
+  speaker,
+  time,
+  children,
+}: {
+  speaker: string;
+  time?: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="border border-[#D5D7CA] bg-[#F7F8F2] p-4">
+      <div className="mb-2 flex items-center gap-2 text-xs font-black uppercase tracking-wide text-[#697064]">
+        <span>{speaker}</span>
+        {time && <span>{time}</span>}
+      </div>
+      <p className="text-sm leading-7 text-[#141711] md:text-base">
+        {children}
+      </p>
     </div>
   );
 }
